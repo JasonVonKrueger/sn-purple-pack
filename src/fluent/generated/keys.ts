@@ -284,6 +284,21 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ui_section'
+                        id: 'a4a47aaa473d0310b1197bb4416d4343'
+                        key: {
+                            name: 'u_peer_review'
+                            caption: 'NULL'
+                            view: {
+                                id: 'Default view'
+                                key: {
+                                    name: 'NULL'
+                                }
+                            }
+                            sys_domain: 'global'
+                        }
+                    },
+                    {
                         table: 'sys_choice_set'
                         id: 'b7c45bc0a3da41c1b8dd43fb3f8d2ca2'
                         key: {
