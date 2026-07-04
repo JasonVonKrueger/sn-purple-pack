@@ -5,16 +5,80 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    assign_integration_outputs: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '27ade3a86ca44f23820c245dc3861bdf'
+                    }
                     bom_json: {
                         table: 'sys_module'
                         id: '12aab1ab858c4a1b9d2d6bb584440813'
+                    }
+                    call_create_integration: {
+                        table: 'sys_hub_sub_flow_instance_v2'
+                        id: '0408b6dbd612424d9a2af0321bd49592'
+                    }
+                    check_integration_success: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '14fb08897fe7408db365947af1753ca9'
+                    }
+                    create_oauth_app: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '5cf37a9a09444fb1a968c5f575f6dce2'
+                    }
+                    create_service_account: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'f6686bb91d624ccdb38d2e6f8486ea49'
+                    }
+                    integration_failed: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '9b89845c99c0477d9feb9daedce2bc51'
+                    }
+                    log_failure: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '87a5adafc92f4cacbe35e7ed188b6db3'
+                    }
+                    log_integration_created: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'ceae0ded463e4e08aff220f9507816ec'
+                    }
+                    log_success: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'b451e12c53934f08883e3e4ed416438a'
                     }
                     package_json: {
                         table: 'sys_module'
                         id: '531f53a3d5ea4e8b81b3490179a9fcad'
                     }
+                    pp_create_integration_subflow: {
+                        table: 'sys_hub_flow'
+                        id: '583df9f6e6af4b54ac3f430b361ae4b1'
+                    }
+                    purple_pack_flow: {
+                        table: 'sys_hub_flow'
+                        id: 'c5a20f8a14654ff5ad64263b7dc05446'
+                    }
+                    trg_service_account_created: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: '38acf7f34bf641dc9257e833bafa334d'
+                    }
                 }
                 composite: [
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '0c7dc3f233a641f68da67cdadf736149'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'first_name'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '0dfa34397c6949d38c2b20243b64523b'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'email'
+                        }
+                    },
                     {
                         table: 'sys_dictionary'
                         id: '101a26c7d93a418eac5f8c01abb242c1'
@@ -24,11 +88,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: '15ef64d8a9864e96ae7e0403c9ad5c20'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'username'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '184f672ad69247799d6d0902f3d47352'
                         key: {
                             name: 'u_peer_review'
                             element: 'update_set_name'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '1a6e3304c37c494ba0c774468a9c7106'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'oauth_app_id'
                             language: 'en'
                         }
                     },
@@ -67,11 +148,37 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '331e018e316446e3afbe65e9616b2b4b'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'first_name'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '36ea44b66cf8423590c377192c8e7b5e'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'email'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '3c66fb61e4a94701867ed75231008798'
                         key: {
                             name: 'u_peer_review'
                             element: 'NULL'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '42a5bb02cccb40f9b25e012ab29fd737'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'oauth_app_name'
                         }
                     },
                     {
@@ -182,6 +289,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_output'
+                        id: '764647140aaf419e9135a8795ce3333c'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'success'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '7fc7f58d76244e308e30242e6b5536e2'
                         key: {
@@ -258,6 +373,15 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '95dd8a1cca904b0fb20235c515ad0718'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'username'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '9d66a1b546e2446f9a26d0aa5e9e8b78'
                         key: {
                             name: 'u_peer_review'
@@ -299,6 +423,24 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'a98ea8e5b8624ca3b3b2d74023af14c5'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'success'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'b28a30614e804837b5fab223a1baa1f9'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'oauth_app_name'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice_set'
                         id: 'b7c45bc0a3da41c1b8dd43fb3f8d2ca2'
                         key: {
@@ -313,6 +455,22 @@ declare global {
                             name: 'u_peer_review'
                             element: 'status'
                             value: 'changes_requested'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'b9968ca3808c45a68ed8ee4336ffbdce'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'redirect_url'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: 'c33bea89e2b94ae9ab4ad294bce1eaa5'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'service_account_id'
                         }
                     },
                     {
@@ -356,6 +514,23 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'd0e7825a8fec498096fe6f21bd7c22dc'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'service_account_id'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: 'd33a0697b817476bbd2d889a5af05870'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'oauth_app_id'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: 'd898be3a9e7d4ea799f4e390aa250204'
                         key: {
@@ -365,10 +540,36 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: 'df991fbb3045462a9407a1cece25e7ac'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'last_name'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'dfe5733ed4224be0b89516c0bf6ac265'
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'last_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: 'e91d3b85a16841e6b392c63ac496e882'
                         key: {
                             name: 'u_peer_review'
                             element: 'status'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'ececda54240c493bb36f18a73049b9cd'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'redirect_url'
                             language: 'en'
                         }
                     },
