@@ -5,18 +5,15 @@ Flow(
         $id: Now.ID['pp_get_syslog_flow'],
         name: 'PP: Get Syslog Records',
         description:
-            'Runs as the system account on a daily schedule and retrieves syslog records from the syslog table.',
+            'Runs as the system account on demand and retrieves syslog records from the syslog table.',
         runAs: 'system',
         flowPriority: 'MEDIUM',
         internalName: 'pp_get_syslog',
     },
     wfa.trigger(
-        trigger.scheduled.daily,
-        { $id: Now.ID['trg_get_syslog_scheduled'] },
-        {
-            time: '00:00:00',
-            timezone: 'UTC',
-        }
+        trigger.serviceApi,
+        { $id: Now.ID['trg_get_syslog_api'] },
+        {}
     ),
     (_params) => {
         // Retrieve the 100 most recent syslog records at warning level or above

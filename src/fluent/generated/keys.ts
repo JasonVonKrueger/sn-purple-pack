@@ -77,7 +77,7 @@ declare global {
                         table: 'sys_hub_flow'
                         id: 'c5a20f8a14654ff5ad64263b7dc05446'
                     }
-                    trg_get_syslog_scheduled: {
+                    trg_get_syslog_api: {
                         table: 'sys_hub_trigger_instance_v2'
                         id: 'a1b2c3d4e5f647389abcdef012345603'
                     }
