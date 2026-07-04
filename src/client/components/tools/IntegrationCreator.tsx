@@ -45,6 +45,7 @@ export function IntegrationCreator() {
                     <Input label="Username" required value={form.username} onValueSet={updateField('username')} placeholder="svc_integration" />
                     <Input label="First Name" required value={form.firstName} onValueSet={updateField('firstName')} placeholder="Service" />
                     <Input label="Last Name" required value={form.lastName} onValueSet={updateField('lastName')} placeholder="Account" />
+                    <Input label="Email" type="email" required value={form.email} onValueSet={updateField('email')} placeholder="svc@example.com" />
                 </div>
             </div>
             <div className="tool-card">

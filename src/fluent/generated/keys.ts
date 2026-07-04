@@ -5,6 +5,14 @@ declare global {
         namespace Internal {
             interface Keys extends KeysRegistry {
                 explicit: {
+                    '2e1a5a7e47398310b1197bb4416d43c7': {
+                        table: 'sys_hub_flow_snapshot'
+                        id: '2e1a5a7e47398310b1197bb4416d43c7'
+                    }
+                    '311ad67e47398310b1197bb4416d43f9': {
+                        table: 'sys_hub_flow_snapshot'
+                        id: '311ad67e47398310b1197bb4416d43f9'
+                    }
                     assign_integration_outputs: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '27ade3a86ca44f23820c245dc3861bdf'
@@ -63,6 +71,14 @@ declare global {
                     }
                 }
                 composite: [
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: '061a1a7e47398310b1197bb4416d4354'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'success'
+                        }
+                    },
                     {
                         table: 'sys_hub_flow_input'
                         id: '0c7dc3f233a641f68da67cdadf736149'
@@ -140,6 +156,16 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '261a5a7e47398310b1197bb4416d43d6'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_2e1a5a7e47398310b1197bb4416d43c7'
+                            element: 'current'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_db_object'
                         id: '319cfbff282046efaa381d790213c1a6'
                         key: {
@@ -166,10 +192,53 @@ declare global {
                     },
                     {
                         table: 'sys_documentation'
+                        id: '391a1a7e47398310b1197bb4416d4313'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'first_name'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '3a1a5a7e47398310b1197bb4416d43da'
+                        deleted: true
+                        key: {
+                            model: '2e1a5a7e47398310b1197bb4416d43c7'
+                            element: 'table_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
                         id: '3c66fb61e4a94701867ed75231008798'
                         key: {
                             name: 'u_peer_review'
                             element: 'NULL'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '3d1a1a7e47398310b1197bb4416d4317'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'last_name'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '421a1a7e47398310b1197bb4416d4339'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'redirect_url'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '421a1a7e47398310b1197bb4416d4367'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_311ad67e47398310b1197bb4416d43f9'
+                            element: 'service_account_id'
                             language: 'en'
                         }
                     },
@@ -190,11 +259,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_output'
+                        id: '461a1a7e47398310b1197bb4416d436b'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'oauth_app_id'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '47ec6c8580164637ac508a8506f89753'
                         key: {
                             name: 'u_peer_review'
                             element: 'requester'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '4a1a1a7e47398310b1197bb4416d431e'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'last_name'
                             language: 'en'
                         }
                     },
@@ -214,6 +300,23 @@ declare global {
                             name: 'u_peer_review'
                             element: 'priority'
                             value: 'high'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '4e1a1a7e47398310b1197bb4416d4322'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'email'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '4e1a1a7e47398310b1197bb4416d4334'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'oauth_app_name'
+                            language: 'en'
                         }
                     },
                     {
@@ -257,6 +360,16 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '621a5a7e47398310b1197bb4416d4355'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_c5a20f8a14654ff5ad64263b7dc05446'
+                            element: 'table_name'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '69a10403f131404f9410ae20298a6794'
                         key: {
@@ -289,11 +402,46 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: '751ad67e47398310b1197bb4416d43fd'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'username'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '761a5a7e47398310b1197bb4416d43e1'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_2e1a5a7e47398310b1197bb4416d43c7'
+                            element: 'table_name'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_hub_flow_output'
                         id: '764647140aaf419e9135a8795ce3333c'
                         key: {
                             model: '583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'success'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '791a1a7e47398310b1197bb4416d4308'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'username'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: '7d1a1a7e47398310b1197bb4416d430c'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'first_name'
                         }
                     },
                     {
@@ -303,6 +451,32 @@ declare global {
                             name: 'u_peer_review'
                             element: 'status'
                             value: 'in_review'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '821a1a7e47398310b1197bb4416d435c'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_311ad67e47398310b1197bb4416d43f9'
+                            element: 'success'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '821a1a7e47398310b1197bb4416d4372'
+                        key: {
+                            name: 'var__m_sys_hub_flow_output_311ad67e47398310b1197bb4416d43f9'
+                            element: 'oauth_app_id'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_output'
+                        id: '861a1a7e47398310b1197bb4416d4360'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'service_account_id'
                         }
                     },
                     {
@@ -474,6 +648,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: 'c61a1a7e47398310b1197bb4416d434c'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'redirect_url'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'ua_table_licensing_config'
                         id: 'c7cbf525f7b84f6f9eca3d446f3efed3'
                         key: {
@@ -487,6 +670,15 @@ declare global {
                             name: 'u_peer_review'
                             element: 'priority'
                             value: 'critical'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'ca1a1a7e47398310b1197bb4416d4329'
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'email'
+                            language: 'en'
                         }
                     },
                     {
@@ -514,12 +706,29 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: 'ce1a1a7e47398310b1197bb4416d432d'
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'oauth_app_name'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: 'd0e7825a8fec498096fe6f21bd7c22dc'
                         key: {
                             name: 'var__m_sys_hub_flow_output_583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'service_account_id'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'd21a5a7e47398310b1197bb4416d4309'
+                        deleted: true
+                        key: {
+                            model: 'c5a20f8a14654ff5ad64263b7dc05446'
+                            element: 'current'
                         }
                     },
                     {
@@ -536,6 +745,25 @@ declare global {
                         key: {
                             name: 'u_peer_review'
                             element: 'update_set_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'da1a5a7e47398310b1197bb4416d4324'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_c5a20f8a14654ff5ad64263b7dc05446'
+                            element: 'current'
+                            language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'de1a5a7e47398310b1197bb4416d4328'
+                        deleted: true
+                        key: {
+                            model: 'c5a20f8a14654ff5ad64263b7dc05446'
+                            element: 'table_name'
                         }
                     },
                     {
@@ -571,6 +799,15 @@ declare global {
                             name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'redirect_url'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'ee1a5a7e47398310b1197bb4416d43c9'
+                        deleted: true
+                        key: {
+                            model: '2e1a5a7e47398310b1197bb4416d43c7'
+                            element: 'current'
                         }
                     },
                     {
