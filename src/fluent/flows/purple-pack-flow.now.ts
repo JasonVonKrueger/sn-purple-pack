@@ -37,7 +37,6 @@ Flow(
                 username: wfa.dataPill(_params.trigger.current.user_name, 'string'),
                 first_name: wfa.dataPill(_params.trigger.current.first_name, 'string'),
                 last_name: wfa.dataPill(_params.trigger.current.last_name, 'string'),
-                email: wfa.dataPill(_params.trigger.current.email, 'string'),
                 oauth_app_name: wfa.dataPill(_params.trigger.current.user_name, 'string'),
                 redirect_url: 'https://localhost/callback',
             }
