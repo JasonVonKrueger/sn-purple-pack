@@ -2,7 +2,6 @@ export interface IntegrationFormState {
     username: string
     firstName: string
     lastName: string
-    email: string
     appName: string
     redirectUrl: string
     description: string
@@ -12,7 +11,6 @@ export const INITIAL_FORM: IntegrationFormState = {
     username: '',
     firstName: '',
     lastName: '',
-    email: '',
     appName: '',
     redirectUrl: '',
     description: '',
@@ -38,7 +36,6 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
             user_name: form.username,
             first_name: form.firstName,
             last_name: form.lastName,
-            email: form.email,
             web_service_access_only: true,
             active: true,
         }),
