@@ -21,8 +21,8 @@ export function LogViewer() {
         try {
             const result: LogViewerResult = await fetchSyslogRecords();
             setEntries(result.entries);
-        } catch (err: any) {
-            setError(err.message || 'Failed to retrieve logs');
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : 'Failed to retrieve logs');
         } finally {
             setLoading(false);
         }
