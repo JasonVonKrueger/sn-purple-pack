@@ -90,6 +90,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '0dfa34397c6949d38c2b20243b64523b'
+                        deleted: false
                         key: {
                             model: '583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'email'
@@ -184,6 +185,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '36ea44b66cf8423590c377192c8e7b5e'
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'email'
@@ -305,6 +307,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '4e1a1a7e47398310b1197bb4416d4322'
+                        deleted: false
                         key: {
                             model: '311ad67e47398310b1197bb4416d43f9'
                             element: 'email'
@@ -675,6 +678,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'ca1a1a7e47398310b1197bb4416d4329'
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
                             element: 'email'

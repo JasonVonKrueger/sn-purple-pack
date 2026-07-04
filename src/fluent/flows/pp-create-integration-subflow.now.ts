@@ -14,6 +14,10 @@ export const ppCreateIntegrationSubflow = Subflow(
             last_name: StringColumn({ label: 'Last Name', mandatory: true }),
             oauth_app_name: StringColumn({ label: 'OAuth App Name', mandatory: true }),
             redirect_url: StringColumn({ label: 'Redirect URL', mandatory: true }),
+            email: StringColumn({
+                label: 'Email',
+                mandatory: true,
+            }),
         },
         outputs: {
             success: BooleanColumn({ label: 'Success', mandatory: true }),
@@ -36,6 +40,7 @@ export const ppCreateIntegrationSubflow = Subflow(
                     last_name: wfa.dataPill(params.inputs.last_name, 'string'),
                     web_service_access_only: 'true',
                     active: 'true',
+                    email: wfa.dataPill(params.inputs.email, 'string'),
                 }),
             }
         )
