@@ -1,4 +1,4 @@
-import { Subflow, wfa, action, TemplateValue } from '@servicenow/sdk/automation'
+import { Subflow, wfa, action } from '@servicenow/sdk/automation'
 import { StringColumn, BooleanColumn } from '@servicenow/sdk/core'
 
 export const ppCreateIntegrationSubflow = Subflow(
@@ -12,8 +12,10 @@ export const ppCreateIntegrationSubflow = Subflow(
             username: StringColumn({ label: 'Username', mandatory: true }),
             first_name: StringColumn({ label: 'First Name', mandatory: true }),
             last_name: StringColumn({ label: 'Last Name', mandatory: true }),
+            manager: StringColumn({ label: 'Manager', mandatory: true }),
             oauth_app_name: StringColumn({ label: 'OAuth App Name', mandatory: true }),
             redirect_url: StringColumn({ label: 'Redirect URL', mandatory: true }),
+            integration_name: StringColumn({ label: 'Integration Name', mandatory: true })
         },
         outputs: {
             success: BooleanColumn({ label: 'Success', mandatory: true }),
@@ -34,6 +36,7 @@ export const ppCreateIntegrationSubflow = Subflow(
                     user_name: wfa.dataPill(params.inputs.username, 'string'),
                     first_name: wfa.dataPill(params.inputs.first_name, 'string'),
                     last_name: wfa.dataPill(params.inputs.last_name, 'string'),
+                    manager: wfa.dataPill(params.inputs.manager, 'string'),
                     web_service_access_only: 'true',
                     active: 'true',
                 }),
@@ -55,7 +58,11 @@ export const ppCreateIntegrationSubflow = Subflow(
             }
         )
 
-        // Step 3: Log the result
+        // Step 3: Create the authentication profile
+
+        // Step 4: Create the access policy
+
+        // Step 10: Log the result
         wfa.action(
             action.core.log,
             {
@@ -67,7 +74,7 @@ export const ppCreateIntegrationSubflow = Subflow(
             }
         )
 
-        // Step 4: Assign outputs
+        // Step 11: Assign outputs
         wfa.flowLogic.assignSubflowOutputs(
             { $id: Now.ID['assign_integration_outputs'], annotation: 'Set subflow outputs' },
             params.outputs,
