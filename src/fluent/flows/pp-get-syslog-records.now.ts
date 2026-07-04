@@ -19,16 +19,16 @@ Flow(
         }
     ),
     (_params) => {
-        // Retrieve syslog records
+        // Retrieve the 100 most recent syslog records at warning level or above
         const syslogs = wfa.action(
             action.core.lookupRecords,
             {
                 $id: Now.ID['lookup_syslog_records'],
-                annotation: 'Query all syslog records',
+                annotation: 'Query up to 100 most recent syslog records at warning level or above',
             },
             {
                 table_name: 'syslog',
-                filter_condition: '',
+                filter_condition: 'levelINwarning,error,critical',
                 order_by: 'sys_created_on',
                 order_direction: 'descending',
                 max_count: '100',
