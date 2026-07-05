@@ -122,24 +122,8 @@ export function IntegrationCreator() {
                     </div>
                 </div>
             </div>
-            <div className="tool-card">
-                <p className="tool-card-title">Service Account</p>
-                <div className="tool-grid">
-                    <Input label="Username" value={form.username} onValueSet={updateField('username')} placeholder="svc_integration" />
-                    <Input label="First Name" value={form.firstName} onValueSet={updateField('firstName')} placeholder="Service" />
-                    <Input label="Last Name" value={form.lastName} onValueSet={updateField('lastName')} placeholder="Account" />
-                </div>
-            </div>
-            <div className="tool-card">
-                <p className="tool-card-title">OAuth Application</p>
-                <div className="tool-grid">
-                    <Input label="App Name" value={form.appName} onValueSet={updateField('appName')} placeholder="My Integration App" />
-                    <Input label="Redirect URL" value={form.redirectUrl} onValueSet={updateField('redirectUrl')} placeholder="https://example.com/callback" />
-                    <Input label="Description" value={form.description} onValueSet={updateField('description')} placeholder="Optional description" />
-                </div>
-            </div>
             <div className="tool-actions">
-                <label className="pp-checkbox-label">
+                <label className="pp-checkbox-label" style={{ width: '100%' }}>
                     <input
                         type="checkbox"
                         className="pp-checkbox"
