@@ -1,4 +1,7 @@
 export interface IntegrationFormState {
+    integrationName: string
+    integrationOwner: string
+    integrationOwnerName: string
     username: string
     firstName: string
     lastName: string
@@ -8,12 +11,38 @@ export interface IntegrationFormState {
 }
 
 export const INITIAL_FORM: IntegrationFormState = {
+    integrationName: '',
+    integrationOwner: '',
+    integrationOwnerName: '',
     username: '',
     firstName: '',
     lastName: '',
     appName: '',
     redirectUrl: '',
     description: '',
+}
+
+export interface GroupOption {
+    sys_id: string
+    name: string
+}
+
+export async function searchGroups(query: string): Promise<GroupOption[]> {
+    if (!query) return []
+    const params = new URLSearchParams({
+        sysparm_query: `nameLIKE${query}^active=true`,
+        sysparm_fields: 'sys_id,name',
+        sysparm_limit: '10',
+    })
+    const res = await fetch(`/api/now/table/sys_user_group?${params}`, {
+        headers: {
+            Accept: 'application/json',
+            'X-UserToken': (window as any).g_ck,
+        },
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name }))
 }
 
 export interface IntegrationResult {
@@ -61,6 +90,6 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
 
     return {
         type: 'positive',
-        message: `Integration created successfully!\n• Service Account: ${form.username} (${userSysId})\n• OAuth App: ${form.appName} (${oauthData.result.sys_id})`,
+        message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${form.username} (${userSysId})\n• OAuth App: ${form.appName} (${oauthData.result.sys_id})`,
     }
 }
