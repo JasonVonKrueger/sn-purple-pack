@@ -1,6 +1,6 @@
-import { Flow, wfa, trigger, action } from '@servicenow/sdk/automation'
+import { Subflow, wfa, action } from '@servicenow/sdk/automation'
 
-Flow(
+export const ppGetSyslogRecordsSubflow = Subflow(
     {
         $id: Now.ID['pp_get_syslog_flow'],
         name: 'PP: Get Syslog Records',
@@ -10,29 +10,22 @@ Flow(
         flowPriority: 'MEDIUM',
         internalName: 'pp_get_syslog',
     },
-    wfa.trigger(
-        trigger.serviceApi,
-        { $id: Now.ID['trg_get_syslog_api'] },
-        {}
-    ),
     (_params) => {
-        // Retrieve the 100 most recent syslog records at warning level or above
         const syslogs = wfa.action(
-            action.core.lookupRecords,
+            action.core.lookUpRecords,
             {
                 $id: Now.ID['lookup_syslog_records'],
                 annotation: 'Query up to 100 most recent syslog records at warning level or above',
             },
             {
-                table_name: 'syslog',
-                filter_condition: 'levelINwarning,error,critical',
-                order_by: 'sys_created_on',
-                order_direction: 'descending',
-                max_count: '100',
+                table: 'syslog',
+                conditions: 'levelINwarning,error,critical',
+                sort_column: 'sys_created_on',
+                sort_type: 'sort_desc',
+                max_results: 100,
             }
         )
 
-        // Log the number of records retrieved
         wfa.action(
             action.core.log,
             {

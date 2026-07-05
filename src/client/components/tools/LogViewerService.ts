@@ -15,7 +15,7 @@ export interface LogViewerResult {
 const PP_GET_SYSLOG_FLOW_SYS_ID = 'a1b2c3d4e5f647389abcdef012345600'
 
 function getSessionToken(): string {
-    const token = (window as Record<string, unknown>).g_ck
+    const token = (window as unknown as Record<string, unknown>).g_ck
     if (typeof token !== 'string' || !token) throw new Error('Session token (g_ck) is not available')
     return token
 }

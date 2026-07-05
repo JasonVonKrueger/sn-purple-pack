@@ -13,9 +13,39 @@ declare global {
                         table: 'sys_hub_flow_snapshot'
                         id: '311ad67e47398310b1197bb4416d43f9'
                     }
+                    '3ecce4a76feb4f4f8215c02c39d0e35b': {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '3ecce4a76feb4f4f8215c02c39d0e35b'
+                        deleted: true
+                    }
+                    '597e5293d6094ca79057b22f30da542a': {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '597e5293d6094ca79057b22f30da542a'
+                        deleted: true
+                    }
+                    approval_accepted: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: '597e5293d6094ca79057b22f30da542a'
+                        deleted: true
+                    }
+                    approval_rejected: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'de562bb27e68488697e12616379564b3'
+                        deleted: true
+                    }
+                    approve_integration_creation: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'fc2c4031439e4b8d8f14b26861f33c1f'
+                        deleted: true
+                    }
                     assign_integration_outputs: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '27ade3a86ca44f23820c245dc3861bdf'
+                    }
+                    assign_rejected_outputs: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'ecfa61882a894fad9d03a3f47ef962dd'
+                        deleted: true
                     }
                     bom_json: {
                         table: 'sys_module'
@@ -37,6 +67,21 @@ declare global {
                         table: 'sys_hub_action_instance_v2'
                         id: 'f6686bb91d624ccdb38d2e6f8486ea49'
                     }
+                    de562bb27e68488697e12616379564b3: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'de562bb27e68488697e12616379564b3'
+                        deleted: true
+                    }
+                    ecfa61882a894fad9d03a3f47ef962dd: {
+                        table: 'sys_hub_flow_logic_instance_v2'
+                        id: 'ecfa61882a894fad9d03a3f47ef962dd'
+                        deleted: true
+                    }
+                    fc2c4031439e4b8d8f14b26861f33c1f: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'fc2c4031439e4b8d8f14b26861f33c1f'
+                        deleted: true
+                    }
                     integration_failed: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '9b89845c99c0477d9feb9daedce2bc51'
@@ -49,21 +94,26 @@ declare global {
                         table: 'sys_hub_action_instance_v2'
                         id: 'ceae0ded463e4e08aff220f9507816ec'
                     }
+                    log_integration_not_approved: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: '3ecce4a76feb4f4f8215c02c39d0e35b'
+                        deleted: true
+                    }
                     log_success: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'b451e12c53934f08883e3e4ed416438a'
                     }
-                    package_json: {
-                        table: 'sys_module'
-                        id: '531f53a3d5ea4e8b81b3490179a9fcad'
+                    log_syslog_results: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'a1b2c3d4e5f647389abcdef012345602'
                     }
                     lookup_syslog_records: {
                         table: 'sys_hub_action_instance_v2'
                         id: 'a1b2c3d4e5f647389abcdef012345601'
                     }
-                    log_syslog_results: {
-                        table: 'sys_hub_action_instance_v2'
-                        id: 'a1b2c3d4e5f647389abcdef012345602'
+                    package_json: {
+                        table: 'sys_module'
+                        id: '531f53a3d5ea4e8b81b3490179a9fcad'
                     }
                     pp_create_integration_subflow: {
                         table: 'sys_hub_flow'
@@ -80,6 +130,7 @@ declare global {
                     trg_get_syslog_api: {
                         table: 'sys_hub_trigger_instance_v2'
                         id: 'a1b2c3d4e5f647389abcdef012345603'
+                        deleted: true
                     }
                     trg_service_account_created: {
                         table: 'sys_hub_trigger_instance_v2'
@@ -227,6 +278,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: '3ab32b2402294bb39c52ea1391a2a286'
+                        deleted: true
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'manager'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '3c66fb61e4a94701867ed75231008798'
                         key: {
@@ -241,6 +301,16 @@ declare global {
                         key: {
                             model: '311ad67e47398310b1197bb4416d43f9'
                             element: 'last_name'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '3e37812b9f5944b6bc3903d4922b2689'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'integration_name'
+                            language: 'en'
                         }
                     },
                     {
@@ -398,6 +468,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: '69b67c2561c04c3aa85599223f413886'
+                        deleted: true
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'manager'
+                        }
+                    },
+                    {
                         table: 'sys_dictionary'
                         id: '6b0f616cdcd64acea84f2eb69289f813'
                         key: {
@@ -491,6 +570,16 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_documentation'
+                        id: '8550c16c5c1e4232af24ee1d9ea656a7'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'integration_name'
+                            language: 'en'
+                        }
+                    },
+                    {
                         table: 'sys_hub_flow_output'
                         id: '861a1a7e47398310b1197bb4416d4360'
                         key: {
@@ -528,6 +617,16 @@ declare global {
                         key: {
                             name: 'u_peer_review'
                             element: 'status'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: '8dff5ced861c4d5f873bb0c22d249524'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
+                            element: 'manager'
+                            language: 'en'
                         }
                     },
                     {
@@ -642,6 +741,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_hub_flow_input'
+                        id: 'b873f0c5c1ff4b5f8361f268cb61327a'
+                        deleted: true
+                        key: {
+                            model: '583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'integration_name'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: 'b887531b5e124e9dbca7da9385dd925c'
                         key: {
@@ -664,6 +772,16 @@ declare global {
                         key: {
                             model: '583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'service_account_id'
+                        }
+                    },
+                    {
+                        table: 'sys_documentation'
+                        id: 'c4fe1a7015d84fa2b7f722411c69a9f8'
+                        deleted: true
+                        key: {
+                            name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
+                            element: 'manager'
+                            language: 'en'
                         }
                     },
                     {
@@ -715,6 +833,15 @@ declare global {
                         key: {
                             name: 'u_peer_review'
                             element: 'NULL'
+                        }
+                    },
+                    {
+                        table: 'sys_hub_flow_input'
+                        id: 'cc4a2f0e8963468589514f0b00aceb23'
+                        deleted: true
+                        key: {
+                            model: '311ad67e47398310b1197bb4416d43f9'
+                            element: 'integration_name'
                         }
                     },
                     {
