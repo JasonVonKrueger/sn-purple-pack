@@ -57,13 +57,29 @@ declare global {
                         table: 'sys_module'
                         id: '531f53a3d5ea4e8b81b3490179a9fcad'
                     }
+                    lookup_syslog_records: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'a1b2c3d4e5f647389abcdef012345601'
+                    }
+                    log_syslog_results: {
+                        table: 'sys_hub_action_instance_v2'
+                        id: 'a1b2c3d4e5f647389abcdef012345602'
+                    }
                     pp_create_integration_subflow: {
                         table: 'sys_hub_flow'
                         id: '583df9f6e6af4b54ac3f430b361ae4b1'
                     }
+                    pp_get_syslog_flow: {
+                        table: 'sys_hub_flow'
+                        id: 'a1b2c3d4e5f647389abcdef012345600'
+                    }
                     purple_pack_flow: {
                         table: 'sys_hub_flow'
                         id: 'c5a20f8a14654ff5ad64263b7dc05446'
+                    }
+                    trg_get_syslog_api: {
+                        table: 'sys_hub_trigger_instance_v2'
+                        id: 'a1b2c3d4e5f647389abcdef012345603'
                     }
                     trg_service_account_created: {
                         table: 'sys_hub_trigger_instance_v2'
