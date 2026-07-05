@@ -11,7 +11,7 @@ Record({
         client: true,
         onclick: [
             "var gm = new GlideModal('scan_and_deploy');",
-            "gm.setTitle('Scan \\u0026 Deploy');",
+            "gm.setTitle('Scan & Deploy');",
             "gm.setWidth(720);",
             "gm.addParam('sysparm_record_id', g_form.getUniqueValue());",
             "gm.addParam('sysparm_record_name', g_form.getValue('name'));",

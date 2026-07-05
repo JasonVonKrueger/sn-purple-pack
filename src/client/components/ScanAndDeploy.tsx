@@ -80,7 +80,8 @@ function getRecordInfo(): { id: string; name: string } {
             id: params.get('sysparm_record_id') || '',
             name: params.get('sysparm_record_name') || 'Unknown Update Set',
         };
-    } catch {
+    } catch (err) {
+        console.error('[ScanAndDeploy] Failed to read URL parameters:', err);
         return { id: '', name: 'Unknown Update Set' };
     }
 }
@@ -230,13 +231,11 @@ export function ScanAndDeploy() {
                     </button>
                 )}
                 <span
-                    className={`sad-status-text${
-                        overallStatus === 'success'
-                            ? ' sad-status-text--success'
-                            : overallStatus === 'error'
-                            ? ' sad-status-text--error'
-                            : ''
-                    }`}
+                    className={[
+                        'sad-status-text',
+                        overallStatus === 'success' && 'sad-status-text--success',
+                        overallStatus === 'error' && 'sad-status-text--error',
+                    ].filter(Boolean).join(' ')}
                 >
                     {overallStatus === 'running' && 'Pipeline running…'}
                     {overallStatus === 'success' && '✓ All phases completed successfully'}
