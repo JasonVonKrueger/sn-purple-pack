@@ -107,6 +107,19 @@ export function IntegrationCreator() {
                             </div>
                         )}
                     </div>
+                    <div className="tool-grid-full">
+                        <label className="pp-textarea-label">Short Description</label>
+                        <textarea
+                            className="pp-textarea"
+                            value={form.shortDescription}
+                            onChange={e => setForm(prev => ({ ...prev, shortDescription: e.target.value }))}
+                            placeholder="Briefly describe the purpose of this integration"
+                            rows={3}
+                        />
+                    </div>
+                    <div>
+                        <Input label="How many requests per hour" value={form.requestsPerHour} onValueSet={updateField('requestsPerHour')} placeholder="e.g. 500" />
+                    </div>
                 </div>
             </div>
             <div className="tool-card">
@@ -126,7 +139,16 @@ export function IntegrationCreator() {
                 </div>
             </div>
             <div className="tool-actions">
-                <Button label="Create Integration" variant="primary" icon="plug-fill" disabled={loading} onClicked={handleCreate} />
+                <label className="pp-checkbox-label">
+                    <input
+                        type="checkbox"
+                        className="pp-checkbox"
+                        checked={form.throttleAcknowledged}
+                        onChange={e => setForm(prev => ({ ...prev, throttleAcknowledged: e.target.checked }))}
+                    />
+                    I understand that my requests may be throttled based on platform performance.
+                </label>
+                <Button label="Create Integration" variant="primary" icon="plug-fill" disabled={loading || !form.throttleAcknowledged} onClicked={handleCreate} />
                 <Button label="Reset" variant="secondary" onClicked={handleReset} />
             </div>
         </div>

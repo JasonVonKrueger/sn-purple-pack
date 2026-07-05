@@ -2,6 +2,9 @@ export interface IntegrationFormState {
     integrationName: string
     integrationOwner: string
     integrationOwnerName: string
+    shortDescription: string
+    requestsPerHour: string
+    throttleAcknowledged: boolean
     username: string
     firstName: string
     lastName: string
@@ -14,6 +17,9 @@ export const INITIAL_FORM: IntegrationFormState = {
     integrationName: '',
     integrationOwner: '',
     integrationOwnerName: '',
+    shortDescription: '',
+    requestsPerHour: '',
+    throttleAcknowledged: false,
     username: '',
     firstName: '',
     lastName: '',
