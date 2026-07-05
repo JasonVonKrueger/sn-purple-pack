@@ -1,74 +1,84 @@
 # Purple Pack 🟣
 
-A developer and admin tools suite built as a ServiceNow UI Page. Purple Pack provides a centralized collection of utilities designed to streamline common development and administration tasks directly within your ServiceNow instance.
+Purple Pack is a ServiceNow UI Page tool suite that consolidates common developer and admin workflows into a single workspace.
 
 ## Access
 
-Navigate to **`/purple_pack.do`** on your instance.
+Open the app on your instance at:
 
-## Features
+- `/purple_pack.do`
 
-Purple Pack uses a modern sidebar navigation layout — click any tool in the left panel to open it in the main content area.
+## Current Tooling
 
-### Tools
+Purple Pack uses a left sidebar layout. Selecting a tool renders it in the main content area.
 
 | Tool | Description |
-|------|-------------|
-| **Script Analyzer** | Scan scripts for best practices, performance issues, and security vulnerabilities |
-| **Table Inspector** | Browse table schemas, view column definitions and relationships |
-| **Log Viewer** | Stream and filter system logs in real time |
-| **Performance Monitor** | Track response times, throughput, and system performance metrics |
-| **Cache Manager** | View cache statistics, flush or clear caches |
-| **Script Debugger** | Set breakpoints, inspect variables, and step through server-side scripts |
-| **Update Set Tracker** | Monitor update set progress, status, and contents |
-| **Instance Healthcheck** | Run system health checks and view instance health scores |
-| **Integration Creator** | Create a service account and OAuth application registry in one step |
-| **Peer Review** | Request and track peer reviews of update sets |
+|---|---|
+| **Script Analyzer** | Scan scripts for best-practice, performance, and security issues |
+| **Table Inspector** | Explore table schemas, columns, and relationships |
+| **Log Viewer** | Stream and filter system logs |
+| **Performance Monitor** | View response-time and throughput trends |
+| **Cache Manager** | Inspect cache stats and clear caches |
+| **Script Debugger** | Debug server-side scripts with breakpoint-style workflow |
+| **Update Set Tracker** | Track update set status and contents |
+| **Instance Healthcheck** | Run health checks and review health scoring |
+| **Integration Creator** | Create service account + OAuth application registry |
+| **Peer Review** | Submit, assign, and track update set peer reviews |
 
-### Peer Review
+## Peer Review Workflow
 
-The Peer Review tool allows developers to:
+The **Peer Review** tool supports:
 
-- **Request reviews** — Select an in-progress update set, assign a reviewer, set priority, and submit
-- **Track status** — View all review requests with live status badges (Pending, In Review, Approved, Changes Requested, Rejected)
-- **Collaborate** — Add notes for context and receive review comments back
+- Creating requests from in-progress update sets
+- Assigning reviewers and priority
+- Tracking statuses like **Pending**, **In Review**, **Approved**, **Changes Requested**, and **Rejected**
+- Capturing notes and review feedback
 
-Data is stored in the **`u_peer_review`** table with auto-numbered records (PR00001, PR00002, etc.).
+Peer review records are stored in the `u_peer_review` table with auto-numbered IDs (`PR00001`, `PR00002`, ...).
 
-## Architecture
+## Repository Structure
 
-```
+```text
 src/
-├── client/                  # React UI (TypeScript + CSS)
-│   ├── index.html           # Entry point
-│   ├── main.tsx             # React bootstrap
-│   ├── app.tsx              # App shell with routing
+├── client/
+│   ├── index.html
+│   ├── main.tsx
+│   ├── app.tsx
 │   └── components/
-│       ├── Sidebar.tsx      # Navigation sidebar
-│       ├── ToolContent.tsx  # View router
-│       └── tools/           # Individual tool components
+│       ├── Sidebar.tsx
+│       ├── ToolContent.tsx
+│       └── tools/
 └── fluent/
     ├── tables/
-    │   └── peer-review.now.ts   # u_peer_review table definition
+    │   └── peer-review.now.ts
     └── ui-pages/
-        └── purple-pack.now.ts   # UiPage registration
+        └── purple-pack.now.ts
 ```
 
 ## Tech Stack
 
-- **React 18** with TypeScript
-- **@servicenow/react-components** (Horizon Design System)
-- **ServiceNow Table API** for data operations
-- **ServiceNow Fluent SDK** for metadata definitions
-- **CSS design tokens** (`--now-color_grouped--purple-*`) for theming
+- TypeScript + React 18
+- `@servicenow/react-components`
+- ServiceNow Fluent SDK (`@servicenow/sdk`)
+- ServiceNow Glide tooling (`@servicenow/glide`)
+- CSS theming tokens (including purple grouped tokens)
 
 ## Development
 
 ```bash
-npm run build    # Build the application
-npm run deploy   # Install to instance
+npm run dev        # Local development
+npm run build      # Production build
+npm run deploy     # Install to instance
+npm run transform  # Transform artifacts
+npm run types      # Refresh SDK dependencies/types
 ```
 
-## License
+## Package Info
 
-UNLICENSED — Internal ServiceNow application.
+- **Package name:** `x-1892699-purple-pack`
+- **Version:** `1.0.0`
+- **License:** `UNLICENSED`
+
+## Notes
+
+This repository’s primary language is **TypeScript**, with supporting CSS, JavaScript, and HTML assets.
