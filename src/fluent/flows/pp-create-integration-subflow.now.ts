@@ -9,11 +9,10 @@ export const ppCreateIntegrationSubflow = Subflow(
         runAs: 'system',
         flowPriority: 'MEDIUM',
         inputs: {
-            username: StringColumn({ label: 'Username', mandatory: true }),
+            username: StringColumn({ label: 'Username (format: SV-IT-SNC-<name>)', mandatory: true }),
             first_name: StringColumn({ label: 'First Name', mandatory: true }),
             last_name: StringColumn({ label: 'Last Name', mandatory: true }),
             oauth_app_name: StringColumn({ label: 'OAuth App Name', mandatory: true }),
-            redirect_url: StringColumn({ label: 'Redirect URL', mandatory: true }),
             email: StringColumn({
                 label: 'Email',
                 mandatory: true,
@@ -57,8 +56,9 @@ export const ppCreateIntegrationSubflow = Subflow(
                 table_name: 'oauth_entity',
                 values: TemplateValue({
                     name: wfa.dataPill(params.inputs.oauth_app_name, 'string'),
-                    redirect_url: wfa.dataPill(params.inputs.redirect_url, 'string'),
                     type: 'client',
+                    grant_type: 'client_credentials',
+                    user: wfa.dataPill(serviceAccount.record, 'reference'),
                     active: 'true',
                 }),
             }

@@ -5,12 +5,6 @@ export interface IntegrationFormState {
     shortDescription: string
     requestsPerHour: string
     throttleAcknowledged: boolean
-    username: string
-    firstName: string
-    lastName: string
-    appName: string
-    redirectUrl: string
-    description: string
 }
 
 export const INITIAL_FORM: IntegrationFormState = {
@@ -20,12 +14,11 @@ export const INITIAL_FORM: IntegrationFormState = {
     shortDescription: '',
     requestsPerHour: '',
     throttleAcknowledged: false,
-    username: '',
-    firstName: '',
-    lastName: '',
-    appName: '',
-    redirectUrl: '',
-    description: '',
+}
+
+export function deriveUsername(integrationName: string): string {
+    const normalized = integrationName.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return `SV-IT-SNC-${normalized}`;
 }
 
 export interface GroupOption {
@@ -63,14 +56,16 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
         'X-UserToken': (window as any).g_ck,
     }
 
+    const username = deriveUsername(form.integrationName);
+
     // Create service account
     const userRes = await fetch('/api/now/table/sys_user', {
         method: 'POST',
         headers,
         body: JSON.stringify({
-            user_name: form.username,
-            first_name: form.firstName,
-            last_name: form.lastName,
+            user_name: username,
+            first_name: 'Service Account',
+            last_name: form.integrationName,
             web_service_access_only: true,
             active: true,
         }),
@@ -79,15 +74,16 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     const userData = await userRes.json()
     const userSysId = userData.result.sys_id
 
-    // Create OAuth application
+    // Create OAuth application registry with client credentials grant type linked to the service account
     const oauthRes = await fetch('/api/now/table/oauth_entity', {
         method: 'POST',
         headers,
         body: JSON.stringify({
-            name: form.appName,
-            redirect_url: form.redirectUrl,
-            comments: form.description,
+            name: form.integrationName,
+            comments: form.shortDescription,
             type: 'client',
+            grant_type: 'client_credentials',
+            user: userSysId,
             active: true,
         }),
     })
@@ -96,6 +92,6 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
 
     return {
         type: 'positive',
-        message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${form.username} (${userSysId})\n• OAuth App: ${form.appName} (${oauthData.result.sys_id})`,
+        message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${username} (${userSysId})\n• OAuth App: ${form.integrationName} (${oauthData.result.sys_id})`,
     }
 }
