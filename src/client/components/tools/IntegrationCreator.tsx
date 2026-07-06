@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Input, InputValueSet } from '@servicenow/react-components/Input';
 import { Button } from '@servicenow/react-components/Button';
 import { Alert } from '@servicenow/react-components/Alert';
-import { IntegrationFormState, IntegrationResult, GroupOption, INITIAL_FORM, createIntegration, searchGroups } from './IntegrationService';
+import { IntegrationFormState, IntegrationResult, GroupOption, INITIAL_FORM, createIntegration, searchGroups, deriveUsername } from './IntegrationService';
 import './ToolContent.css';
 
 export function IntegrationCreator() {
@@ -88,6 +88,9 @@ export function IntegrationCreator() {
                 <div className="tool-grid">
                     <div ref={nameInputRef}>
                         <Input label="Integration Name" required value={form.integrationName} onValueSet={updateField('integrationName')} placeholder="My Integration" />
+                    </div>
+                    <div>
+                        <Input label="Service Account Username" value={form.integrationName ? deriveUsername(form.integrationName) : ''} disabled placeholder="Derived from Integration Name" />
                     </div>
                     <div className="pp-reference-wrap">
                         <Input
