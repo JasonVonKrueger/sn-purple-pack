@@ -23,6 +23,10 @@ declare global {
                         id: '597e5293d6094ca79057b22f30da542a'
                         deleted: true
                     }
+                    a0f78c1b47754710b1197bb4416d43f8: {
+                        table: 'sys_hub_flow_snapshot'
+                        id: 'a0f78c1b47754710b1197bb4416d43f8'
+                    }
                     approval_accepted: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '597e5293d6094ca79057b22f30da542a'
@@ -127,6 +131,10 @@ declare global {
                         table: 'sys_hub_flow'
                         id: 'c5a20f8a14654ff5ad64263b7dc05446'
                     }
+                    'scan-and-deploy-ui-action': {
+                        table: 'sys_ui_action'
+                        id: 'ac915d006e8e4a46a638177511a9cce5'
+                    }
                     trg_get_syslog_api: {
                         table: 'sys_hub_trigger_instance_v2'
                         id: 'a1b2c3d4e5f647389abcdef012345603'
@@ -207,6 +215,13 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ux_lib_asset'
+                        id: '1c9d8330e10e4d8aa3a9e165d3c17924'
+                        key: {
+                            name: 'global/scan_and_deploy_main.js.map'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '21488e21b19f4c11a3b8978770f7780c'
                         key: {
@@ -226,7 +241,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '261a5a7e47398310b1197bb4416d43d6'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_2e1a5a7e47398310b1197bb4416d43c7'
                             element: 'current'
@@ -271,7 +286,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '3a1a5a7e47398310b1197bb4416d43da'
-                        deleted: true
+                        deleted: false
                         key: {
                             model: '2e1a5a7e47398310b1197bb4416d43c7'
                             element: 'table_name'
@@ -284,6 +299,14 @@ declare global {
                         key: {
                             model: '583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'manager'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '3c243be189fd4a2b9517bdaa462eb325'
+                        key: {
+                            application_file: '5e9650a712d34217a85cfe040a84e4f2'
+                            source_artifact: 'a66541a70ac54695a84bfcc46203041d'
                         }
                     },
                     {
@@ -449,13 +472,28 @@ declare global {
                         }
                     },
                     {
+                        table: 'sys_ux_lib_asset'
+                        id: '5e9650a712d34217a85cfe040a84e4f2'
+                        key: {
+                            name: 'global/scan_and_deploy_main'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '621a5a7e47398310b1197bb4416d4355'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_c5a20f8a14654ff5ad64263b7dc05446'
                             element: 'table_name'
                             language: 'en'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '66365a50b4b445f49d00f014f04ff499'
+                        key: {
+                            application_file: '1c9d8330e10e4d8aa3a9e165d3c17924'
+                            source_artifact: 'a66541a70ac54695a84bfcc46203041d'
                         }
                     },
                     {
@@ -510,7 +548,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: '761a5a7e47398310b1197bb4416d43e1'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_2e1a5a7e47398310b1197bb4416d43c7'
                             element: 'table_name'
@@ -682,6 +720,14 @@ declare global {
                         }
                     },
                     {
+                        table: 'sn_glider_source_artifact_m2m'
+                        id: '9df189618846432882f8ac99e6bf9e4a'
+                        key: {
+                            application_file: 'f53b81d9d0f24305b14d83e8932f1289'
+                            source_artifact: 'a66541a70ac54695a84bfcc46203041d'
+                        }
+                    },
+                    {
                         table: 'sys_choice'
                         id: '9f833b262563402b93fe4e36bd3a642f'
                         key: {
@@ -712,6 +758,13 @@ declare global {
                                 }
                             }
                             sys_domain: 'global'
+                        }
+                    },
+                    {
+                        table: 'sn_glider_source_artifact'
+                        id: 'a66541a70ac54695a84bfcc46203041d'
+                        key: {
+                            name: 'scan_and_deploy.do - BYOUI Files'
                         }
                     },
                     {
@@ -872,7 +925,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'd21a5a7e47398310b1197bb4416d4309'
-                        deleted: true
+                        deleted: false
                         key: {
                             model: 'c5a20f8a14654ff5ad64263b7dc05446'
                             element: 'current'
@@ -897,7 +950,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'da1a5a7e47398310b1197bb4416d4324'
-                        deleted: true
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_c5a20f8a14654ff5ad64263b7dc05446'
                             element: 'current'
@@ -907,7 +960,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'de1a5a7e47398310b1197bb4416d4328'
-                        deleted: true
+                        deleted: false
                         key: {
                             model: 'c5a20f8a14654ff5ad64263b7dc05446'
                             element: 'table_name'
@@ -951,10 +1004,17 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'ee1a5a7e47398310b1197bb4416d43c9'
-                        deleted: true
+                        deleted: false
                         key: {
                             model: '2e1a5a7e47398310b1197bb4416d43c7'
                             element: 'current'
+                        }
+                    },
+                    {
+                        table: 'sys_ui_page'
+                        id: 'f53b81d9d0f24305b14d83e8932f1289'
+                        key: {
+                            name: 'scan_and_deploy'
                         }
                     },
                     {

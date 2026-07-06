@@ -4,11 +4,11 @@ export const ppGetSyslogRecordsSubflow = Subflow(
     {
         $id: Now.ID['pp_get_syslog_flow'],
         name: 'PP: Get Syslog Records',
-        description:
-            'Runs as the system account on demand and retrieves syslog records from the syslog table.',
+        description: 'Runs as the system account on demand and retrieves syslog records from the syslog table.',
         runAs: 'system',
         flowPriority: 'MEDIUM',
         internalName: 'pp_get_syslog',
+        masterSnapshot: 'a0f78c1b47754710b1197bb4416d43f8',
     },
     (_params) => {
         const syslogs = wfa.action(
