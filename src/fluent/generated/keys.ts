@@ -370,6 +370,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: '421a1a7e47398310b1197bb4416d4339'
+                        deleted: false
                         key: {
                             model: '311ad67e47398310b1197bb4416d43f9'
                             element: 'redirect_url'
@@ -854,6 +855,7 @@ declare global {
                     {
                         table: 'sys_hub_flow_input'
                         id: 'b9968ca3808c45a68ed8ee4336ffbdce'
+                        deleted: false
                         key: {
                             model: '583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'redirect_url'
@@ -880,6 +882,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'c61a1a7e47398310b1197bb4416d434c'
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_311ad67e47398310b1197bb4416d43f9'
                             element: 'redirect_url'
@@ -1044,6 +1047,7 @@ declare global {
                     {
                         table: 'sys_documentation'
                         id: 'ececda54240c493bb36f18a73049b9cd'
+                        deleted: false
                         key: {
                             name: 'var__m_sys_hub_flow_input_583df9f6e6af4b54ac3f430b361ae4b1'
                             element: 'redirect_url'

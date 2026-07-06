@@ -1,10 +1,5 @@
 import '@servicenow/sdk/global'
-import {
-    CatalogItem,
-    SingleLineTextVariable,
-    MultiLineTextVariable,
-    CheckboxVariable,
-} from '@servicenow/sdk/core'
+import { CatalogItem, SingleLineTextVariable, MultiLineTextVariable, CheckboxVariable } from '@servicenow/sdk/core'
 
 export const newIntegrationRequest = CatalogItem({
     $id: Now.ID['new_integration_request'],
@@ -38,4 +33,5 @@ export const newIntegrationRequest = CatalogItem({
             order: 500,
         }),
     },
+    version: 2,
 })
