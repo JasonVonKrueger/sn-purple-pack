@@ -229,7 +229,7 @@ GitLabCommitter.prototype = {
 
         if (statusCode === 200 || statusCode === 201) {
             var parsed = {};
-            try { parsed = JSON.parse(responseBody); } catch (e) { /* ignore */ }
+            try { parsed = JSON.parse(responseBody); } catch (e) { gs.debug('GitLabCommitter: failed to parse success response body: ' + e.message); }
             var commitUrl = this.gitlabUrl + '/' + this.gitlabProjectId +
                             '/-/commit/' + (parsed.commit_id || '');
             return {
@@ -244,7 +244,7 @@ GitLabCommitter.prototype = {
         try {
             var errObj = JSON.parse(responseBody);
             if (errObj.message) errorDetail = errObj.message;
-        } catch (e) { /* use raw body */ }
+        } catch (e) { gs.debug('GitLabCommitter: failed to parse error response body: ' + e.message); }
 
         throw new Error('HTTP ' + statusCode + ' from GitLab: ' + errorDetail);
     },

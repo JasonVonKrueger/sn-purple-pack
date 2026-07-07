@@ -60,7 +60,7 @@ Configure the following system properties before use:
 | `x_1892699_purple_pack.gitlab.branch` | ➖ | Target branch (default: `main`) |
 | `x_1892699_purple_pack.gitlab.directory` | ➖ | Directory inside the repo for XML files (default: `update-sets`) |
 
-The committed file is named `<directory>/<sanitised_update_set_name>.xml` and the XML envelope matches the standard ServiceNow update-set export format so it can be imported directly via **Retrieved Update Sets**.
+The committed file is named `<directory>/<sanitized_update_set_name>.xml` and the XML envelope matches the standard ServiceNow update-set export format so it can be imported directly via **Retrieved Update Sets**.
 
 ## Repository Structure
 
