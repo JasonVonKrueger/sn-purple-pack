@@ -24,7 +24,7 @@ function statusBadgeClass(status: string): string {
 }
 
 export function PeerReview() {
-    const [view, setView] = useState<'request' | 'reviews'>('request');
+    const [view, setView] = useState<'request' | 'reviews'>('reviews');
     const [updateSets, setUpdateSets] = useState<UpdateSetOption[]>([]);
     const [reviews, setReviews] = useState<PeerReviewRecord[]>([]);
     const [form, setForm] = useState<PeerReviewForm>({ updateSetName: '', updateSetId: '', reviewer: '', priority: 'normal', notes: '' });
@@ -41,8 +41,8 @@ export function PeerReview() {
     }
 
     async function handleSubmit() {
-        if (!form.updateSetName || !form.reviewer) {
-            setResult({ type: 'critical', message: 'Update set and reviewer are required.' });
+        if (!form.updateSetName) {
+            setResult({ type: 'critical', message: 'An update set is required.' });
             return;
         }
         setLoading(true); setResult(null);
@@ -62,8 +62,8 @@ export function PeerReview() {
                 <p>Request peer reviews of update sets and track review status.</p>
             </div>
             <div className="tool-actions">
+                <Button label="View Requests" variant={view === 'reviews' ? 'primary' : 'secondary'} icon="list-fill" onClicked={() => setView('reviews')} />
                 <Button label="New Request" variant={view === 'request' ? 'primary' : 'secondary'} icon="document-fill" onClicked={() => setView('request')} />
-                <Button label="View Reviews" variant={view === 'reviews' ? 'primary' : 'secondary'} icon="list-fill" onClicked={() => setView('reviews')} />
             </div>
             {result && <Alert status={result.type} content={result.message} icon={result.type === 'positive' ? 'circle-check-fill' : 'circle-exclamation-fill'} />}
             {view === 'request' ? (
@@ -79,7 +79,6 @@ export function PeerReview() {
                         {updateSets.length === 0 && <div className="tool-list-item"><span className="tool-list-label">No in-progress update sets found</span></div>}
                     </div>
                     <div className="tool-grid">
-                        <Input label="Reviewer (sys_id)" required value={form.reviewer} onValueSet={((e: any) => setForm(prev => ({ ...prev, reviewer: e.detail.payload.value }))) as InputValueSet} placeholder="Enter reviewer sys_id" />
                         <Input label="Notes" value={form.notes} onValueSet={((e: any) => setForm(prev => ({ ...prev, notes: e.detail.payload.value }))) as InputValueSet} placeholder="Optional notes" />
                     </div>
                     <p className="tool-card-title">Priority</p>
@@ -103,7 +102,7 @@ export function PeerReview() {
                             <span className={statusBadgeClass(r.status)}>{r.status?.replace('_', ' ')}</span>
                         </div>
                     ))}
-                    {reviews.length === 0 && <div className="tool-list-item"><span className="tool-list-label">No review requests found</span></div>}
+                    {reviews.length === 0 && <div className="tool-list-item"><span className="tool-list-label">There are currently no Peer Review requests.</span></div>}
                 </div>
             )}
         </div>
