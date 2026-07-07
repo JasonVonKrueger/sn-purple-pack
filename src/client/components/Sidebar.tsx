@@ -14,7 +14,6 @@ const NAV_ITEMS: NavItem[] = [
     { id: 'log-viewer', label: 'Log Viewer', icon: 'document-fill' },
     { id: 'performance-monitor', label: 'Performance Monitor', icon: 'chart-line-fill' },
     { id: 'cache-manager', label: 'Cache Manager', icon: 'clear-cache-fill' },
-    { id: 'script-debugger', label: 'Script Debugger', icon: 'bug-search-fill' },
     { id: 'update-set-tracker', label: 'Update Set Tracker', icon: 'change-fill' },
     { id: 'instance-healthcheck', label: 'Instance Healthcheck', icon: 'health-status-fill' },
     { id: 'integration-creator', label: 'Integration Creator', icon: 'plug-fill' },
