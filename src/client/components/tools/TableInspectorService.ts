@@ -48,7 +48,8 @@ async function fetchCount(table: string, query?: string): Promise<number> {
 
 export async function fetchTableInspectorData(params: FetchTableParams): Promise<TableInspectorData> {
     const { page, pageSize, search } = params
-    const trimmed = search.trim()
+    // Strip characters that have special meaning in ServiceNow encoded queries
+    const trimmed = search.trim().replace(/[\\^=]/g, '')
     const searchQuery = trimmed ? `nameLIKE${trimmed}^ORlabelLIKE${trimmed}` : ''
     const tableQuery = searchQuery ? `${searchQuery}^ORDERBYname` : 'ORDERBYname'
 

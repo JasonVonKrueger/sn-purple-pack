@@ -31,7 +31,7 @@ export function TableInspector() {
         setError(null);
         fetchTableInspectorData({ page: currentPage, pageSize: PAGE_SIZE, search: debouncedSearch })
             .then(result => { if (!cancelled) { setData(result); setLoading(false); } })
-            .catch(err => { if (!cancelled) { setError(err.message ?? 'Failed to load table data'); setLoading(false); } });
+            .catch(err => { if (!cancelled) { setData(null); setError(err.message ?? 'Failed to load table data'); setLoading(false); } });
         return () => { cancelled = true; };
     }, [currentPage, debouncedSearch, refreshKey]);
 
@@ -136,7 +136,7 @@ export function TableInspector() {
                         ← Previous
                     </button>
                     <span className="tool-pagination-info">
-                        Page {currentPage} of {totalPages.toLocaleString()}
+                        Page {currentPage} of {totalPages}
                     </span>
                     <button
                         className="tool-pagination-btn"
