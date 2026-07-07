@@ -89,9 +89,9 @@ export function IntegrationCreator() {
                     <div ref={nameInputRef}>
                         <Input label="Integration Name" required value={form.integrationName} onValueSet={updateField('integrationName')} placeholder="My Integration" />
                     </div>
-                    <div>
+                    {/* <div>
                         <Input label="Service Account Username" value={form.integrationName ? deriveUsername(form.integrationName) : ''} disabled placeholder="Derived from Integration Name" />
-                    </div>
+                    </div> */}
                     <div className="pp-reference-wrap">
                         <div className="pp-owner-input-wrap">
                             <label className="pp-owner-input-label">
@@ -116,6 +116,9 @@ export function IntegrationCreator() {
                             </div>
                         )}
                     </div>
+                    <div>
+                        <Input label="How many requests per hour" value={form.requestsPerHour} onValueSet={updateField('requestsPerHour')} placeholder="e.g. 500" />
+                    </div>
                     <div className="tool-grid-full">
                         <label className="pp-textarea-label">Short Description</label>
                         <textarea
@@ -125,9 +128,6 @@ export function IntegrationCreator() {
                             placeholder="Briefly describe the purpose of this integration"
                             rows={3}
                         />
-                    </div>
-                    <div>
-                        <Input label="How many requests per hour" value={form.requestsPerHour} onValueSet={updateField('requestsPerHour')} placeholder="e.g. 500" />
                     </div>
                 </div>
             </div>
