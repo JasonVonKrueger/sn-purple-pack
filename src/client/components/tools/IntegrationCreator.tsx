@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Input, InputValueSet } from '@servicenow/react-components/Input';
 import { Button } from '@servicenow/react-components/Button';
 import { Alert } from '@servicenow/react-components/Alert';
-import { IntegrationFormState, IntegrationResult, GroupOption, INITIAL_FORM, createIntegration, searchGroups, deriveUsername } from './IntegrationService';
+import { IntegrationFormState, IntegrationResult, UserOption, INITIAL_FORM, createIntegration, searchUsers, deriveUsername } from './IntegrationService';
 import './ToolContent.css';
 
 export function IntegrationCreator() {
     const [form, setForm] = useState<IntegrationFormState>(INITIAL_FORM);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<IntegrationResult | null>(null);
-    const [groupOptions, setGroupOptions] = useState<GroupOption[]>([]);
-    const [groupSearch, setGroupSearch] = useState('');
-    const [showGroupDropdown, setShowGroupDropdown] = useState(false);
+    const [userOptions, setUserOptions] = useState<UserOption[]>([]);
+    const [userSearch, setUserSearch] = useState('');
+    const [showUserDropdown, setShowUserDropdown] = useState(false);
     const nameInputRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -21,16 +21,16 @@ export function IntegrationCreator() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (groupSearch && !form.integrationOwner) {
-                searchGroups(groupSearch).then(setGroupOptions);
-                setShowGroupDropdown(true);
+            if (userSearch && !form.integrationOwner) {
+                searchUsers(userSearch).then(setUserOptions);
+                setShowUserDropdown(true);
             } else {
-                setGroupOptions([]);
-                setShowGroupDropdown(false);
+                setUserOptions([]);
+                setShowUserDropdown(false);
             }
         }, 250);
         return () => clearTimeout(timer);
-    }, [groupSearch, form.integrationOwner]);
+    }, [userSearch, form.integrationOwner]);
 
     function updateField(field: keyof IntegrationFormState) {
         return ((event: any) => {
@@ -38,17 +38,17 @@ export function IntegrationCreator() {
         }) as InputValueSet;
     }
 
-    function handleOwnerSearch(event: any) {
-        const value: string = event.detail.payload.value;
-        setGroupSearch(value);
+    function handleOwnerSearch(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+        setUserSearch(value);
         setForm(prev => ({ ...prev, integrationOwner: '', integrationOwnerName: value }));
     }
 
-    function selectGroup(group: GroupOption) {
-        setForm(prev => ({ ...prev, integrationOwner: group.sys_id, integrationOwnerName: group.name }));
-        setGroupSearch('');
-        setGroupOptions([]);
-        setShowGroupDropdown(false);
+    function selectUser(user: UserOption) {
+        setForm(prev => ({ ...prev, integrationOwner: user.sys_id, integrationOwnerName: user.name }));
+        setUserSearch('');
+        setUserOptions([]);
+        setShowUserDropdown(false);
     }
 
     async function handleCreate() {
@@ -58,7 +58,7 @@ export function IntegrationCreator() {
             const res = await createIntegration(form);
             setResult(res);
             setForm(INITIAL_FORM);
-            setGroupSearch('');
+            setUserSearch('');
         } catch (err: any) {
             setResult({ type: 'critical', message: err.message || 'An error occurred' });
         } finally {
@@ -69,9 +69,9 @@ export function IntegrationCreator() {
     function handleReset() {
         setForm(INITIAL_FORM);
         setResult(null);
-        setGroupSearch('');
-        setGroupOptions([]);
-        setShowGroupDropdown(false);
+        setUserSearch('');
+        setUserOptions([]);
+        setShowUserDropdown(false);
     }
 
     return (
@@ -93,18 +93,24 @@ export function IntegrationCreator() {
                         <Input label="Service Account Username" value={form.integrationName ? deriveUsername(form.integrationName) : ''} disabled placeholder="Derived from Integration Name" />
                     </div>
                     <div className="pp-reference-wrap">
-                        <Input
-                            label="Integration Owner"
-                            required
-                            value={form.integrationOwnerName}
-                            onValueSet={handleOwnerSearch as InputValueSet}
-                            placeholder="Search for a group..."
-                        />
-                        {showGroupDropdown && groupOptions.length > 0 && (
-                            <div className="pp-group-dropdown">
-                                {groupOptions.map(g => (
-                                    <button key={g.sys_id} className="pp-group-dropdown-item" type="button" onMouseDown={() => selectGroup(g)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') selectGroup(g); }}>
-                                        {g.name}
+                        <div className="pp-owner-input-wrap">
+                            <label className="pp-owner-input-label">
+                                Integration Owner<span className="pp-required">*</span>
+                            </label>
+                            <input
+                                className="pp-owner-input"
+                                type="text"
+                                value={form.integrationOwnerName}
+                                onChange={handleOwnerSearch}
+                                placeholder="Search for a user..."
+                                autoComplete="off"
+                            />
+                        </div>
+                        {showUserDropdown && userOptions.length > 0 && (
+                            <div className="pp-owner-dropdown">
+                                {userOptions.map(u => (
+                                    <button key={u.sys_id} className="pp-owner-dropdown-item" type="button" aria-label={`Select ${u.name}`} onMouseDown={() => selectUser(u)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); selectUser(u); } }}>
+                                        {u.name}
                                     </button>
                                 ))}
                             </div>
