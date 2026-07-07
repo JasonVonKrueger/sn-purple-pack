@@ -110,7 +110,7 @@ export function IntegrationCreator() {
                             <div className="pp-owner-dropdown">
                                 {userOptions.map(u => (
                                     <button key={u.sys_id} className="pp-owner-dropdown-item" type="button" aria-label={`Select ${u.name}`} onMouseDown={() => selectUser(u)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); selectUser(u); } }}>
-                                        {u.name}
+                                        {u.name} <span className="pp-owner-dropdown-username">({u.user_name})</span>
                                     </button>
                                 ))}
                             </div>

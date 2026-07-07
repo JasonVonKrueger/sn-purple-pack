@@ -261,3 +261,8 @@
     background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
     outline: none;
 }
+
+.pp-owner-dropdown-username {
+    font-size: 12px;
+    color: rgb(var(--now-color_text--tertiary, 150,155,158));
+}

@@ -24,13 +24,15 @@ export function deriveUsername(integrationName: string): string {
 export interface UserOption {
     sys_id: string
     name: string
+    user_name: string
 }
 
 export async function searchUsers(query: string): Promise<UserOption[]> {
     if (!query) return []
     const params = new URLSearchParams({
-        sysparm_query: `nameLIKE${query}^active=true^web_service_access_only=false`, // exclude service accounts; owners must be real users
-        sysparm_fields: 'sys_id,name',
+        // search both full name and username so queries like "tommie.reuland" resolve correctly
+        sysparm_query: `nameLIKE${query}^ORuser_nameLIKE${query}^active=true^web_service_access_only=false`,
+        sysparm_fields: 'sys_id,name,user_name',
         sysparm_limit: '10',
     })
     const res = await fetch(`/api/now/table/sys_user?${params}`, {
@@ -41,7 +43,7 @@ export async function searchUsers(query: string): Promise<UserOption[]> {
     })
     if (!res.ok) return []
     const data = await res.json()
-    return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name }))
+    return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name, user_name: r.user_name }))
 }
 
 export interface IntegrationResult {
@@ -73,6 +75,22 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     if (!userRes.ok) throw new Error('Failed to create service account')
     const userData = await userRes.json()
     const userSysId = userData.result.sys_id
+
+    // Assign required roles to the service account
+    const roleNames = ['oauth_user', 'snc_platform_rest_api_access']
+    for (const roleName of roleNames) {
+        const roleRes = await fetch(`/api/now/table/sys_user_role?sysparm_query=name=${roleName}&sysparm_fields=sys_id&sysparm_limit=1`, { headers })
+        if (!roleRes.ok) throw new Error(`Failed to look up role: ${roleName}`)
+        const roleData = await roleRes.json()
+        const roleSysId = roleData.result?.[0]?.sys_id
+        if (!roleSysId) throw new Error(`Role not found: ${roleName}`)
+        const assignRes = await fetch('/api/now/table/sys_user_has_role', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ user: userSysId, role: roleSysId }),
+        })
+        if (!assignRes.ok) throw new Error(`Failed to assign role: ${roleName}`)
+    }
 
     // Create OAuth application registry with client credentials grant type linked to the service account
     const oauthRes = await fetch('/api/now/table/oauth_entity', {
