@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@servicenow/react-components/Button';
 import { Alert } from '@servicenow/react-components/Alert';
 import { TableInspectorData, fetchTableInspectorData } from './TableInspectorService';
@@ -11,30 +11,42 @@ export function TableInspector() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [search, setSearch] = useState('');
+    const [debouncedSearch, setDebouncedSearch] = useState('');
+    const [refreshKey, setRefreshKey] = useState(0);
 
-    const load = useCallback(async () => {
+    // Debounce search input — reset to page 1 on new term
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setCurrentPage(1);
+            setDebouncedSearch(search);
+        }, 400);
+        return () => clearTimeout(timer);
+    }, [search]);
+
+    // Fetch data whenever page, debounced search, or refresh key changes
+    useEffect(() => {
+        let cancelled = false;
         setLoading(true);
         setError(null);
-        try {
-            setData(await fetchTableInspectorData());
-            setCurrentPage(1);
-        } catch (err: any) {
-            setError(err.message ?? 'Failed to load table data');
-        } finally {
-            setLoading(false);
-        }
-    }, []);
+        fetchTableInspectorData({ page: currentPage, pageSize: PAGE_SIZE, search: debouncedSearch })
+            .then(result => { if (!cancelled) { setData(result); setLoading(false); } })
+            .catch(err => { if (!cancelled) { setData(null); setError(err.message ?? 'Failed to load table data'); setLoading(false); } });
+        return () => { cancelled = true; };
+    }, [currentPage, debouncedSearch, refreshKey]);
 
-    useEffect(() => { load(); }, [load]);
+    const handleRefresh = () => {
+        setSearch('');
+        setDebouncedSearch('');
+        setCurrentPage(1);
+        setRefreshKey(k => k + 1);
+    };
 
     const avgFields = data && data.totalTables > 0
         ? (data.totalFields / data.totalTables).toFixed(1)
         : '—';
 
-    const totalPages = data ? Math.ceil(data.tables.length / PAGE_SIZE) : 0;
-    const pagedTables = data
-        ? data.tables.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
-        : [];
+    const totalPages = data ? Math.ceil(data.filteredCount / PAGE_SIZE) : 0;
 
     function formatFieldCount(n: number): string {
         return n >= 1000 ? `${(n / 1000).toFixed(1)}K` : n.toString();
@@ -53,7 +65,7 @@ export function TableInspector() {
                 <p>Browse and inspect table schemas, relationships, and field configurations.</p>
             </div>
             <div className="tool-actions">
-                <Button label="Refresh Schema" variant="primary" icon="table-search-fill" disabled={loading} onClicked={load} />
+                <Button label="Refresh Schema" variant="primary" icon="table-search-fill" disabled={loading} onClicked={handleRefresh} />
                 <Button label="Compare Tables" variant="secondary" />
             </div>
             {error && <Alert status="critical" content={error} icon="circle-exclamation-fill" />}
@@ -74,13 +86,28 @@ export function TableInspector() {
                     <p className="tool-card-meta">Avg {avgFields} per table</p>
                 </div>
             </div>
+            <div className="tool-search-wrap">
+                <input
+                    className="tool-search"
+                    type="text"
+                    placeholder="Search tables by name or label…"
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    disabled={loading && !data}
+                />
+                {debouncedSearch && data && (
+                    <span className="tool-search-count">
+                        {data.filteredCount.toLocaleString()} result{data.filteredCount !== 1 ? 's' : ''}
+                    </span>
+                )}
+            </div>
             <div className="tool-list">
                 {loading && (
                     <div className="tool-list-item">
                         <span className="tool-list-label">Loading tables…</span>
                     </div>
                 )}
-                {!loading && pagedTables.map(t => (
+                {!loading && data?.tables.map(t => (
                     <div key={t.sys_id} className="tool-list-item">
                         <span className="tool-list-label">
                             <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'purple'}`}></span>
@@ -93,7 +120,9 @@ export function TableInspector() {
                 ))}
                 {!loading && data?.tables.length === 0 && (
                     <div className="tool-list-item">
-                        <span className="tool-list-label">No tables found</span>
+                        <span className="tool-list-label">
+                            {debouncedSearch ? `No tables matching "${debouncedSearch}"` : 'No tables found'}
+                        </span>
                     </div>
                 )}
             </div>
