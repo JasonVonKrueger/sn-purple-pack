@@ -1,5 +1,5 @@
 import '@servicenow/sdk/global'
-import { CatalogItem, SingleLineTextVariable, MultiLineTextVariable, CheckboxVariable } from '@servicenow/sdk/core'
+import { CatalogItem, SingleLineTextVariable, MultiLineTextVariable, CheckboxVariable, ReferenceVariable } from '@servicenow/sdk/core'
 
 export const newIntegrationRequest = CatalogItem({
     $id: Now.ID['new_integration_request'],
@@ -11,10 +11,11 @@ export const newIntegrationRequest = CatalogItem({
             mandatory: true,
             order: 100,
         }),
-        integration_owner: SingleLineTextVariable({
+        integration_owner: ReferenceVariable({
             question: 'Integration owner',
             mandatory: true,
             order: 200,
+            referenceTable: 'sys_user',
         }),
         short_description: MultiLineTextVariable({
             question: 'Short description',
