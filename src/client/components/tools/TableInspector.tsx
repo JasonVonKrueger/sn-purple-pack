@@ -4,16 +4,20 @@ import { Alert } from '@servicenow/react-components/Alert';
 import { TableInspectorData, fetchTableInspectorData } from './TableInspectorService';
 import './ToolContent.css';
 
+const PAGE_SIZE = 25;
+
 export function TableInspector() {
     const [data, setData] = useState<TableInspectorData | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const load = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
             setData(await fetchTableInspectorData());
+            setCurrentPage(1);
         } catch (err: any) {
             setError(err.message ?? 'Failed to load table data');
         } finally {
@@ -26,6 +30,11 @@ export function TableInspector() {
     const avgFields = data && data.totalTables > 0
         ? (data.totalFields / data.totalTables).toFixed(1)
         : '—';
+
+    const totalPages = data ? Math.ceil(data.tables.length / PAGE_SIZE) : 0;
+    const pagedTables = data
+        ? data.tables.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+        : [];
 
     function formatFieldCount(n: number): string {
         return n >= 1000 ? `${(n / 1000).toFixed(1)}K` : n.toString();
@@ -71,7 +80,7 @@ export function TableInspector() {
                         <span className="tool-list-label">Loading tables…</span>
                     </div>
                 )}
-                {!loading && data?.tables.map(t => (
+                {!loading && pagedTables.map(t => (
                     <div key={t.sys_id} className="tool-list-item">
                         <span className="tool-list-label">
                             <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'purple'}`}></span>
@@ -88,6 +97,27 @@ export function TableInspector() {
                     </div>
                 )}
             </div>
+            {!loading && totalPages > 1 && (
+                <div className="tool-pagination">
+                    <button
+                        className="tool-pagination-btn"
+                        disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(p => p - 1)}
+                    >
+                        ← Previous
+                    </button>
+                    <span className="tool-pagination-info">
+                        Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                        className="tool-pagination-btn"
+                        disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(p => p + 1)}
+                    >
+                        Next →
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
