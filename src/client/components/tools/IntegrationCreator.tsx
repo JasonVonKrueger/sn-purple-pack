@@ -38,8 +38,8 @@ export function IntegrationCreator() {
         }) as InputValueSet;
     }
 
-    function handleOwnerSearch(event: any) {
-        const value: string = event.detail.payload.value;
+    function handleOwnerSearch(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
         setUserSearch(value);
         setForm(prev => ({ ...prev, integrationOwner: '', integrationOwnerName: value }));
     }
@@ -93,17 +93,23 @@ export function IntegrationCreator() {
                         <Input label="Service Account Username" value={form.integrationName ? deriveUsername(form.integrationName) : ''} disabled placeholder="Derived from Integration Name" />
                     </div>
                     <div className="pp-reference-wrap">
-                        <Input
-                            label="Integration Owner"
-                            required
-                            value={form.integrationOwnerName}
-                            onValueSet={handleOwnerSearch as InputValueSet}
-                            placeholder="Search for a user..."
-                        />
+                        <div className="pp-owner-input-wrap">
+                            <label className="pp-owner-input-label">
+                                Integration Owner<span className="pp-required">*</span>
+                            </label>
+                            <input
+                                className="pp-owner-input"
+                                type="text"
+                                value={form.integrationOwnerName}
+                                onChange={handleOwnerSearch}
+                                placeholder="Search for a user..."
+                                autoComplete="off"
+                            />
+                        </div>
                         {showUserDropdown && userOptions.length > 0 && (
-                            <div className="pp-user-dropdown">
+                            <div className="pp-owner-dropdown">
                                 {userOptions.map(u => (
-                                    <button key={u.sys_id} className="pp-user-dropdown-item" type="button" onMouseDown={() => selectUser(u)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') selectUser(u); }}>
+                                    <button key={u.sys_id} className="pp-owner-dropdown-item" type="button" aria-label={`Select ${u.name}`} onMouseDown={() => selectUser(u)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); selectUser(u); } }}>
                                         {u.name}
                                     </button>
                                 ))}

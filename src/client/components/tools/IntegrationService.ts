@@ -29,7 +29,7 @@ export interface UserOption {
 export async function searchUsers(query: string): Promise<UserOption[]> {
     if (!query) return []
     const params = new URLSearchParams({
-        sysparm_query: `nameLIKE${query}^active=true^web_service_access_only=false`,
+        sysparm_query: `nameLIKE${query}^active=true^web_service_access_only=false`, // exclude service accounts; owners must be real users
         sysparm_fields: 'sys_id,name',
         sysparm_limit: '10',
     })
