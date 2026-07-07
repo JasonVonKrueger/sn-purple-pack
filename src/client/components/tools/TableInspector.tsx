@@ -27,6 +27,16 @@ export function TableInspector() {
         ? (data.totalFields / data.totalTables).toFixed(1)
         : '—';
 
+    function formatFieldCount(n: number): string {
+        return n >= 1000 ? `${(n / 1000).toFixed(1)}K` : n.toString();
+    }
+
+    function tableDisplayLabel(name: string, label: string, scopeLabel: string): string {
+        const labelSuffix = label && label !== name ? ` — ${label}` : '';
+        const scopeSuffix = scopeLabel && scopeLabel !== 'Global' ? ` (${scopeLabel})` : '';
+        return `${name}${labelSuffix}${scopeSuffix}`;
+    }
+
     return (
         <div className="tool-page">
             <div className="tool-header">
@@ -51,7 +61,7 @@ export function TableInspector() {
                 </div>
                 <div className="tool-card">
                     <p className="tool-card-title">Total Fields</p>
-                    <p className="tool-card-value">{loading ? '…' : (data ? (data.totalFields >= 1000 ? `${(data.totalFields / 1000).toFixed(1)}K` : data.totalFields.toString()) : '—')}</p>
+                    <p className="tool-card-value">{loading ? '…' : (data ? formatFieldCount(data.totalFields) : '—')}</p>
                     <p className="tool-card-meta">Avg {avgFields} per table</p>
                 </div>
             </div>
@@ -65,7 +75,7 @@ export function TableInspector() {
                     <div key={t.sys_id} className="tool-list-item">
                         <span className="tool-list-label">
                             <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'purple'}`}></span>
-                            {t.name}{t.label && t.label !== t.name ? ` — ${t.label}` : ''}{t.scope_label && t.scope_label !== 'Global' ? ` (${t.scope_label})` : ''}
+                            {tableDisplayLabel(t.name, t.label, t.scope_label)}
                         </span>
                         <span className={`pp-badge${t.is_custom ? ' pp-badge--green' : ' pp-badge--purple'}`}>
                             {t.is_custom ? 'Custom' : 'System'}
