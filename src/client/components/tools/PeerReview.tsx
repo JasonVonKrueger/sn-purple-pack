@@ -62,7 +62,7 @@ export function PeerReview() {
                 <p>Request peer reviews of update sets and track review status.</p>
             </div>
             <div className="tool-actions">
-                <Button label="View Reviews" variant={view === 'reviews' ? 'primary' : 'secondary'} icon="list-fill" onClicked={() => setView('reviews')} />
+                <Button label="View Requests" variant={view === 'reviews' ? 'primary' : 'secondary'} icon="list-fill" onClicked={() => setView('reviews')} />
                 <Button label="New Request" variant={view === 'request' ? 'primary' : 'secondary'} icon="document-fill" onClicked={() => setView('request')} />
             </div>
             {result && <Alert status={result.type} content={result.message} icon={result.type === 'positive' ? 'circle-check-fill' : 'circle-exclamation-fill'} />}
