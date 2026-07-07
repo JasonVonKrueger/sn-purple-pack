@@ -132,16 +132,7 @@ export function IntegrationCreator() {
                 </div>
             </div>
             <div className="tool-actions">
-                <label className="pp-checkbox-label" style={{ width: '100%' }}>
-                    <input
-                        type="checkbox"
-                        className="pp-checkbox"
-                        checked={form.throttleAcknowledged}
-                        onChange={e => setForm(prev => ({ ...prev, throttleAcknowledged: e.target.checked }))}
-                    />
-                    I understand that my requests may be throttled based on platform performance.
-                </label>
-                <Button label="Create Integration" variant="primary" icon="plug-fill" disabled={loading || !form.throttleAcknowledged} onClicked={handleCreate} />
+                <Button label="Create Integration" variant="primary" icon="plug-fill" disabled={loading} onClicked={handleCreate} />
                 <Button label="Reset" variant="secondary" onClicked={handleReset} />
             </div>
         </div>
