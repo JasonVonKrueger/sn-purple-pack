@@ -190,7 +190,7 @@
     cursor: pointer;
 }
 
-.pp-group-dropdown {
+.pp-user-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
@@ -204,7 +204,7 @@
     overflow-y: auto;
 }
 
-.pp-group-dropdown-item {
+.pp-user-dropdown-item {
     display: block;
     width: 100%;
     text-align: left;
@@ -216,8 +216,8 @@
     color: rgb(var(--now-color_text--primary, 41,41,41));
 }
 
-.pp-group-dropdown-item:hover,
-.pp-group-dropdown-item:focus {
+.pp-user-dropdown-item:hover,
+.pp-user-dropdown-item:focus {
     background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
     outline: none;
 }

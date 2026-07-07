@@ -21,19 +21,19 @@ export function deriveUsername(integrationName: string): string {
     return `SV-IT-SNC-${normalized}`;
 }
 
-export interface GroupOption {
+export interface UserOption {
     sys_id: string
     name: string
 }
 
-export async function searchGroups(query: string): Promise<GroupOption[]> {
+export async function searchUsers(query: string): Promise<UserOption[]> {
     if (!query) return []
     const params = new URLSearchParams({
-        sysparm_query: `nameLIKE${query}^active=true`,
+        sysparm_query: `nameLIKE${query}^active=true^web_service_access_only=false`,
         sysparm_fields: 'sys_id,name',
         sysparm_limit: '10',
     })
-    const res = await fetch(`/api/now/table/sys_user_group?${params}`, {
+    const res = await fetch(`/api/now/table/sys_user?${params}`, {
         headers: {
             Accept: 'application/json',
             'X-UserToken': (window as any).g_ck,
