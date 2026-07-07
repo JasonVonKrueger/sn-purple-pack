@@ -102,7 +102,7 @@ export function PeerReview() {
                             <span className={statusBadgeClass(r.status)}>{r.status?.replace('_', ' ')}</span>
                         </div>
                     ))}
-                    {reviews.length === 0 && <div className="tool-list-item"><span className="tool-list-label">There are currently no pending Peer Review requests.</span></div>}
+                    {reviews.length === 0 && <div className="tool-list-item"><span className="tool-list-label">There are currently no Peer Review requests.</span></div>}
                 </div>
             )}
         </div>
