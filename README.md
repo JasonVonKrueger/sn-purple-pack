@@ -36,6 +36,32 @@ The **Peer Review** tool supports:
 
 Peer review records are stored in the `u_peer_review` table with auto-numbered IDs (`PR00001`, `PR00002`, ...).
 
+## GitLabCommitter Script Include
+
+The **GitLabCommitter** script include (`x_1892699_purple_pack.GitLabCommitter`) exports a ServiceNow update set as XML and commits it to a configured GitLab repository.
+
+### Usage
+
+```javascript
+var committer = new x_1892699_purple_pack.GitLabCommitter();
+var result = committer.commitUpdateSet('<update_set_sys_id>');
+// result: { success: boolean, message: string, commitUrl: string }
+```
+
+### System Properties
+
+Configure the following system properties before use:
+
+| Property | Required | Description |
+|---|---|---|
+| `x_1892699_purple_pack.gitlab.url` | ✅ | GitLab base URL (e.g. `https://gitlab.example.com`) |
+| `x_1892699_purple_pack.gitlab.token` | ✅ | Personal or project access token with `api` scope |
+| `x_1892699_purple_pack.gitlab.project_id` | ✅ | Numeric project ID or URL-encoded `namespace/project` path |
+| `x_1892699_purple_pack.gitlab.branch` | ➖ | Target branch (default: `main`) |
+| `x_1892699_purple_pack.gitlab.directory` | ➖ | Directory inside the repo for XML files (default: `update-sets`) |
+
+The committed file is named `<directory>/<sanitised_update_set_name>.xml` and the XML envelope matches the standard ServiceNow update-set export format so it can be imported directly via **Retrieved Update Sets**.
+
 ## Repository Structure
 
 ```text
@@ -49,6 +75,8 @@ src/
 │       ├── ToolContent.tsx
 │       └── tools/
 └── fluent/
+    ├── script-includes/
+    │   └── gitlab-committer.now.ts
     ├── tables/
     │   └── peer-review.now.ts
     └── ui-pages/

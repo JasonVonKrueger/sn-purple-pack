@@ -135,6 +135,10 @@ declare global {
                         table: 'sys_hub_flow'
                         id: 'c5a20f8a14654ff5ad64263b7dc05446'
                     }
+                    gitlab_committer: {
+                        table: 'sys_script_include'
+                        id: '351753adbdda4a5f8dff8e9fb7383b47'
+                    }
                     'scan-and-deploy-ui-action': {
                         table: 'sys_ui_action'
                         id: 'ac915d006e8e4a46a638177511a9cce5'
