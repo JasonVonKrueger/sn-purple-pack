@@ -5,6 +5,7 @@ import {
     CodeSearchResult,
     ScriptTableKey,
     SCRIPT_TABLES,
+    LIMIT_PER_TABLE,
     searchCode,
 } from './CodeSearchService';
 import './ToolContent.css';
@@ -15,6 +16,8 @@ function tableBadgeClass(tableKey: string): string {
         case 'sys_script_client':  return 'pp-badge pp-badge--green';
         case 'sys_business_rule':  return 'pp-badge pp-badge--yellow';
         case 'sys_script':         return 'pp-badge pp-badge--red';
+        case 'sys_ui_script':      return 'pp-badge pp-badge--purple';
+        case 'sys_ui_action':      return 'pp-badge pp-badge--green';
         default:                   return 'pp-badge';
     }
 }
@@ -112,7 +115,7 @@ export function CodeSearch() {
                     <span className="tool-search-count">
                         {total} result{total !== 1 ? 's' : ''} for &ldquo;{query}&rdquo;
                         {tableKey !== 'all' ? ` in ${SCRIPT_TABLES.find(t => t.key === tableKey)?.label ?? tableKey}` : ''}
-                        {tableKey === 'all' ? ' (up to 10 per type shown)' : ''}
+                        {tableKey === 'all' ? ` (up to ${LIMIT_PER_TABLE} per type shown)` : ''}
                     </span>
                 </div>
             )}

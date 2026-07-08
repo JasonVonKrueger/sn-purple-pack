@@ -37,12 +37,12 @@ export const SCRIPT_TABLES: ScriptTableMeta[] = [
     { key: 'sys_ui_action',      label: 'UI Action',      scriptField: 'script', nameField: 'name' },
 ]
 
-const LIMIT_PER_TABLE = 10
+export const LIMIT_PER_TABLE = 10
 const LIMIT_SINGLE_TABLE = 25
 
 function getSessionToken(): string {
     const token = (window as unknown as Record<string, unknown>).g_ck
-    if (typeof token !== 'string' || !token) throw new Error('Session token (g_ck) is not available')
+    if (typeof token !== 'string' || !token) throw new Error('Unable to authenticate request. Please refresh the page and try again.')
     return token
 }
 
@@ -56,7 +56,8 @@ function buildHeaders(): Record<string, string> {
 
 async function searchTable(meta: ScriptTableMeta, query: string, limit: number): Promise<CodeSearchResult[]> {
     const trimmed = query.trim().replace(/[\\^]/g, '')
-    const encodedQuery = `${meta.scriptField}CONTAINS${trimmed}^ORnameCONTAINS${trimmed}^ORDERBYname`
+    const safe = encodeURIComponent(trimmed)
+    const encodedQuery = `${meta.scriptField}CONTAINS${safe}^ORnameCONTAINS${safe}^ORDERBYname`
     const params = new URLSearchParams({
         sysparm_query: encodedQuery,
         sysparm_limit: limit.toString(),
@@ -67,7 +68,7 @@ async function searchTable(meta: ScriptTableMeta, query: string, limit: number):
         method: 'GET',
         headers: buildHeaders(),
     })
-    if (!res.ok) throw new Error(`Code search failed on ${meta.key}: ${res.status} ${res.statusText}`)
+    if (!res.ok) throw new Error(`Failed to search ${meta.label}: ${res.statusText}`)
     const data = await res.json()
     return (data.result ?? []).map((r: any) => {
         const rawScript: string = r[meta.scriptField]?.value ?? r[meta.scriptField] ?? ''
