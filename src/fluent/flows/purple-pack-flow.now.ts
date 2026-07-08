@@ -9,8 +9,6 @@ Flow(
             'Main Purple Pack orchestration flow. Triggers when a service account is created and provisions the full integration (OAuth app).',
         runAs: 'system',
         flowPriority: 'MEDIUM',
-        internalName: 'purple_pack',
-        masterSnapshot: '2e1a5a7e47398310b1197bb4416d43c7',
     },
     wfa.trigger(
         trigger.record.created,

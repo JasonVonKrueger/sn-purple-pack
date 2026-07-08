@@ -27,8 +27,6 @@ export const ppCreateIntegrationSubflow = Subflow(
             service_account_id: StringColumn({ label: 'Service Account Sys ID' }),
             oauth_app_id: StringColumn({ label: 'OAuth App Sys ID' }),
         },
-        internalName: 'pp_create_integration',
-        masterSnapshot: '311ad67e47398310b1197bb4416d43f9',
     },
     (params) => {
         // Step 0: Approval gate before any work is done
