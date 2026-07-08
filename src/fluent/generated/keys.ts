@@ -93,6 +93,18 @@ declare global {
                         table: 'sys_script_include'
                         id: '351753adbdda4a5f8dff8e9fb7383b47'
                     }
+                    gitlab_project_id: {
+                        table: 'sys_properties'
+                        id: 'f5084c07f30f4f26bfd924dd18f1b73e'
+                    }
+                    gitlab_token: {
+                        table: 'sys_properties'
+                        id: '3f9e3193117b439bab10bda886e1908c'
+                    }
+                    gitlab_url: {
+                        table: 'sys_properties'
+                        id: 'f0f71971dd374d39a5d14ebb29f44505'
+                    }
                     integration_failed: {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '9b89845c99c0477d9feb9daedce2bc51'
