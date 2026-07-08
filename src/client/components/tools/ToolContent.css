@@ -335,3 +335,19 @@
     color: rgb(var(--now-color_text--secondary, 100,106,109));
     white-space: nowrap;
 }
+
+.code-search-snippet {
+    font-size: 12px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
+    color: rgb(var(--now-color_text--primary, 41,41,41));
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 80px;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
