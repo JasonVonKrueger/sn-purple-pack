@@ -10,8 +10,8 @@ Record({
         description: 'GitLab base URL (e.g. https://gitlab.example.com)',
         type: 'string',
         suffix: 'gitlab.url',
-        read_roles: 'admin',
-        write_roles: 'admin',
+        read_roles: ['admin'],
+        write_roles: ['admin'],
     },
 })
 
@@ -24,8 +24,8 @@ Record({
         description: 'Personal / project access token for GitLab API authentication',
         type: 'password2',
         suffix: 'gitlab.token',
-        read_roles: 'admin',
-        write_roles: 'admin',
+        read_roles: ['admin'],
+        write_roles: ['admin'],
     },
 })
 
@@ -38,7 +38,7 @@ Record({
         description: 'Numeric project ID or URL-encoded namespace/project path in GitLab',
         type: 'string',
         suffix: 'gitlab.project_id',
-        read_roles: 'admin',
-        write_roles: 'admin',
+        read_roles: ['admin'],
+        write_roles: ['admin'],
     },
 })
