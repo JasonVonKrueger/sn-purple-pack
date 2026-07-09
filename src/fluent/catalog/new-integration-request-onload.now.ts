@@ -1,11 +1,12 @@
 import '@servicenow/sdk/global'
 import { CatalogClientScript } from '@servicenow/sdk/core'
+import { newIntegrationRequest } from './new-integration-request.now'
 
 CatalogClientScript({
     $id: Now.ID['new_integration_request_onload'],
     name: 'New Integration Request - Load REST APIs',
     type: 'onLoad',
-    catalogItem: Now.ID['new_integration_request'],
+    catalogItem: newIntegrationRequest,
     active: true,
     script: `function onLoad() {
     var selectedSvcVal = g_form.getValue('api');
