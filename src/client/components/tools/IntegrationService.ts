@@ -108,8 +108,37 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     if (!oauthRes.ok) throw new Error('Failed to create OAuth application')
     const oauthData = await oauthRes.json()
 
+    // Pick a random REST API endpoint (sys_ws_definition)
+    const apiRes = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=20', { headers })
+    let randomApiSysId = ''
+    if (apiRes.ok) {
+        const apiData = await apiRes.json()
+        const apis: { sys_id: string }[] = apiData.result ?? []
+        if (apis.length > 0) {
+            randomApiSysId = apis[Math.floor(Math.random() * apis.length)].sys_id
+        }
+    }
+
+    // Create REST API rate limit rule for the integration
+    const rateLimitBody: Record<string, string> = {
+        name: form.integrationName,
+        version: 'latest',
+        apply_to: 'single_user',
+        user: userSysId,
+    }
+    if (randomApiSysId) {
+        rateLimitBody.scripted_rest_api = randomApiSysId
+    }
+    const rateLimitRes = await fetch('/api/now/table/sys_rate_limit_rules', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(rateLimitBody),
+    })
+    if (!rateLimitRes.ok) throw new Error('Failed to create rate limit rule')
+    const rateLimitData = await rateLimitRes.json()
+
     return {
         type: 'positive',
-        message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${username} (${userSysId})\n• OAuth App: ${form.integrationName} (${oauthData.result.sys_id})`,
+        message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${username} (${userSysId})\n• OAuth App: ${form.integrationName} (${oauthData.result.sys_id})\n• Rate Limit Rule: ${form.integrationName} (${rateLimitData.result.sys_id})`,
     }
 }
