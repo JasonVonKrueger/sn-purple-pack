@@ -15,7 +15,10 @@ Record({
         hint: 'Run instance scan, commit to Git, and deploy to test instance',
         order: 100,
         client_script_v2: `function onClick(g_form) {
-
+    const modal = new GlideModal('scan_and_deploy');
+    modal.setTitle('Scan & Deploy');
+    modal.setWidth(900);
+    modal.render();
 }`,
         form_action: true,
         form_button_v2: false,

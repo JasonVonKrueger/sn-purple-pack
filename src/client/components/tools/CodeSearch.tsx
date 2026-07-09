@@ -31,12 +31,19 @@ function recordUrl(r: CodeSearchResult): string {
 export function CodeSearch() {
     const [query, setQuery] = useState('');
     const [tableKey, setTableKey] = useState<ScriptTableKey>('all');
+    const [allResults, setAllResults] = useState<CodeSearchResult[]>([]);
     const [results, setResults] = useState<CodeSearchResult[]>([]);
     const [total, setTotal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [page, setPage] = useState(1);
     const inputRef = useRef<HTMLInputElement>(null);
+
+    function applyFilter(items: CodeSearchResult[], key: ScriptTableKey) {
+        const filtered = key === 'all' ? items : items.filter(r => r.table === key);
+        setResults(filtered);
+        setTotal(filtered.length);
+    }
 
     async function handleSearch() {
         const trimmed = query.trim();
@@ -45,11 +52,12 @@ export function CodeSearch() {
         setError(null);
         setPage(1);
         try {
-            const res = await searchCode(trimmed, tableKey);
-            setResults(res.results);
-            setTotal(res.total);
+            const res = await searchCode(trimmed, 'all');
+            setAllResults(res.results);
+            applyFilter(res.results, tableKey);
         } catch (err: any) {
             setError(err.message ?? 'Search failed');
+            setAllResults([]);
             setResults([]);
             setTotal(null);
         } finally {
@@ -63,11 +71,20 @@ export function CodeSearch() {
 
     function handleClear() {
         setQuery('');
+        setAllResults([]);
         setResults([]);
         setTotal(null);
         setError(null);
         setPage(1);
         inputRef.current?.focus();
+    }
+
+    function handleTableKeyChange(key: ScriptTableKey) {
+        setTableKey(key);
+        setPage(1);
+        if (allResults.length > 0) {
+            applyFilter(allResults, key);
+        }
     }
 
     const totalPages = Math.ceil(results.length / PAGE_SIZE);
@@ -108,14 +125,14 @@ export function CodeSearch() {
                 <Button
                     label="All Types"
                     variant={tableKey === 'all' ? 'primary' : 'secondary'}
-                    onClicked={() => { setTableKey('all'); setPage(1); }}
+                    onClicked={() => handleTableKeyChange('all')}
                 />
                 {SCRIPT_TABLES.map(t => (
                     <Button
                         key={t.key}
                         label={t.label}
                         variant={tableKey === t.key ? 'primary' : 'secondary'}
-                        onClicked={() => { setTableKey(t.key as ScriptTableKey); setPage(1); }}
+                        onClicked={() => handleTableKeyChange(t.key as ScriptTableKey)}
                     />
                 ))}
             </div>
