@@ -162,13 +162,13 @@ declare global {
                         table: 'sys_hub_flow'
                         id: 'c5a20f8a14654ff5ad64263b7dc05446'
                     }
-                    'scan-and-deploy-ui-action': {
-                        table: 'sys_ui_action'
-                        id: 'ac915d006e8e4a46a638177511a9cce5'
-                    }
                     'request-peer-review-ui-action': {
                         table: 'sys_ui_action'
                         id: 'b2d3e4f5a6b74c8d9e0f1a2b3c4d5e6f'
+                    }
+                    'scan-and-deploy-ui-action': {
+                        table: 'sys_ui_action'
+                        id: 'ac915d006e8e4a46a638177511a9cce5'
                     }
                     'src_server_script-includes_gitlab-committer_js': {
                         table: 'sys_module'
