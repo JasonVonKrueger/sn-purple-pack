@@ -166,6 +166,10 @@ declare global {
                         table: 'sys_ui_action'
                         id: 'ac915d006e8e4a46a638177511a9cce5'
                     }
+                    'request-peer-review-ui-action': {
+                        table: 'sys_ui_action'
+                        id: 'b2d3e4f5a6b74c8d9e0f1a2b3c4d5e6f'
+                    }
                     'src_server_script-includes_gitlab-committer_js': {
                         table: 'sys_module'
                         id: 'f68f12773414447585ef177243d0a03f'
