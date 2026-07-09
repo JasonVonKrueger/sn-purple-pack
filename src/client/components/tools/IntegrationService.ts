@@ -5,6 +5,8 @@ export interface IntegrationFormState {
     shortDescription: string
     requestsPerHour: string
     throttleAcknowledged: boolean
+    restApi: string
+    restApiResource: string
 }
 
 export const INITIAL_FORM: IntegrationFormState = {
@@ -14,6 +16,8 @@ export const INITIAL_FORM: IntegrationFormState = {
     shortDescription: '',
     requestsPerHour: '',
     throttleAcknowledged: false,
+    restApi: '',
+    restApiResource: '',
 }
 
 export function deriveUsername(integrationName: string): string {
@@ -25,6 +29,17 @@ export interface UserOption {
     sys_id: string
     name: string
     user_name: string
+}
+
+export interface RestApiOption {
+    sys_id: string
+    name: string
+}
+
+export interface RestApiResourceOption {
+    sys_id: string
+    name: string
+    http_path: string
 }
 
 export async function searchUsers(query: string): Promise<UserOption[]> {
@@ -49,6 +64,34 @@ export async function searchUsers(query: string): Promise<UserOption[]> {
 export interface IntegrationResult {
     type: 'positive' | 'critical'
     message: string
+}
+
+export async function fetchRestApis(): Promise<RestApiOption[]> {
+    const headers = {
+        Accept: 'application/json',
+        'X-UserToken': (window as any).g_ck,
+    }
+    const res = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=100&sysparm_query=active=true^ORDERBYname', { headers })
+    if (!res.ok) return []
+    const data = await res.json()
+    return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name }))
+}
+
+export async function fetchRestApiResources(restApiSysId: string): Promise<RestApiResourceOption[]> {
+    if (!restApiSysId) return []
+    const headers = {
+        Accept: 'application/json',
+        'X-UserToken': (window as any).g_ck,
+    }
+    const params = new URLSearchParams({
+        sysparm_query: `web_service_definition=${restApiSysId}^active=true^ORDERBYname`,
+        sysparm_fields: 'sys_id,name,http_path',
+        sysparm_limit: '100',
+    })
+    const res = await fetch(`/api/now/table/sys_ws_operation?${params}`, { headers })
+    if (!res.ok) return []
+    const data = await res.json()
+    return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name, http_path: r.http_path }))
 }
 
 export async function createIntegration(form: IntegrationFormState): Promise<IntegrationResult> {
@@ -108,17 +151,14 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     if (!oauthRes.ok) throw new Error('Failed to create OAuth application')
     const oauthData = await oauthRes.json()
 
-    // Pick a random REST API endpoint (sys_ws_definition)
-    const apiRes = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=20', { headers })
-    let randomApiSysId = ''
-    let randomApiName = ''
-    if (apiRes.ok) {
-        const apiData = await apiRes.json()
-        const apis: { sys_id: string; name: string }[] = apiData.result ?? []
-        if (apis.length > 0) {
-            const picked = apis[Math.floor(Math.random() * apis.length)]
-            randomApiSysId = picked.sys_id
-            randomApiName = picked.name
+    // Use the selected REST API if provided
+    const selectedApiSysId = form.restApi || ''
+    let selectedApiName = ''
+    if (selectedApiSysId) {
+        const apiRes = await fetch(`/api/now/table/sys_ws_definition/${selectedApiSysId}?sysparm_fields=name`, { headers })
+        if (apiRes.ok) {
+            const apiData = await apiRes.json()
+            selectedApiName = apiData.result?.name ?? ''
         }
     }
 
@@ -129,8 +169,8 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
         apply_to: 'single_user',
         user: userSysId,
     }
-    if (randomApiSysId) {
-        rateLimitBody.scripted_rest_api = randomApiSysId
+    if (selectedApiSysId) {
+        rateLimitBody.scripted_rest_api = selectedApiSysId
     }
     const rateLimitRes = await fetch('/api/now/table/sys_rate_limit_rules', {
         method: 'POST',
@@ -140,7 +180,7 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     if (!rateLimitRes.ok) throw new Error('Failed to create rate limit rule')
     const rateLimitData = await rateLimitRes.json()
 
-    const apiNote = randomApiName ? ` → API: ${randomApiName}` : ' (no API endpoint associated)'
+    const apiNote = selectedApiName ? ` → API: ${selectedApiName}` : ' (no API endpoint associated)'
     return {
         type: 'positive',
         message: `Integration "${form.integrationName}" created successfully!\n• Service Account: ${username} (${userSysId})\n• OAuth App: ${form.integrationName} (${oauthData.result.sys_id})\n• Rate Limit Rule: ${form.integrationName} (${rateLimitData.result.sys_id})${apiNote}`,
