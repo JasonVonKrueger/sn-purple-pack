@@ -108,14 +108,14 @@ export function CodeSearch() {
                 <Button
                     label="All Types"
                     variant={tableKey === 'all' ? 'primary' : 'secondary'}
-                    onClicked={() => setTableKey('all')}
+                    onClicked={() => { setTableKey('all'); setPage(1); }}
                 />
                 {SCRIPT_TABLES.map(t => (
                     <Button
                         key={t.key}
                         label={t.label}
                         variant={tableKey === t.key ? 'primary' : 'secondary'}
-                        onClicked={() => setTableKey(t.key as ScriptTableKey)}
+                        onClicked={() => { setTableKey(t.key as ScriptTableKey); setPage(1); }}
                     />
                 ))}
             </div>
@@ -143,7 +143,7 @@ export function CodeSearch() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
                             <span className="tool-list-label" style={{ fontWeight: 600 }}>
                                 <span className="status-dot status-dot--purple"></span>
-                                <a href={recordUrl(r)} target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                                <a href={recordUrl(r)} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
                                     {r.name}
                                 </a>
                                 {r.scope_label && r.scope_label !== 'Global' && (
