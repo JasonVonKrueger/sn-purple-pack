@@ -20,7 +20,7 @@ CatalogClientScript({
         var opName = getOpName(svcName, g_scratchpad.svcOptionInfos[svcName]);
 
         // add selected svc first
-        if (opVal == selectedSvcVal)
+        if (opVal === selectedSvcVal)
             g_form.addOption('api', opVal, opName, 0);
         else
             otherSvcsNV[opName] = opVal;
@@ -29,13 +29,6 @@ CatalogClientScript({
     for (var key in otherSvcsNV) {
         g_form.addOption('api', otherSvcsNV[key], key);
     }
-}
-
-function getOpValue(svcInfo) {
-    if (svcInfo['scripted'])
-        return svcInfo['sysId'];
-    else
-        return svcInfo['route'];
 }
 
 function getOpName(svcName, svcInfo) {
