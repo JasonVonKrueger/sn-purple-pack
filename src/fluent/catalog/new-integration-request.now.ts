@@ -1,5 +1,5 @@
 import '@servicenow/sdk/global'
-import { CatalogItem, SingleLineTextVariable, MultiLineTextVariable, CheckboxVariable, ReferenceVariable } from '@servicenow/sdk/core'
+import { CatalogItem, SingleLineTextVariable, MultiLineTextVariable, CheckboxVariable, ReferenceVariable, SelectBoxVariable } from '@servicenow/sdk/core'
 
 export const newIntegrationRequest = CatalogItem({
     $id: Now.ID['new_integration_request'],
@@ -27,6 +27,11 @@ export const newIntegrationRequest = CatalogItem({
             mandatory: true,
             order: 400,
             validateRegex: '^[0-9]+$',
+        }),
+        api: SelectBoxVariable({
+            question: 'REST API',
+            mandatory: true,
+            order: 450,
         }),
         acknowledge: CheckboxVariable({
             question: 'Acknowledge',
