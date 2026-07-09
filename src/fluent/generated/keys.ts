@@ -146,6 +146,10 @@ declare global {
                         table: 'sc_cat_item'
                         id: '519f41f556654a2ca87fbf08064a02ba'
                     }
+                    new_integration_request_onload: {
+                        table: 'catalog_script_client'
+                        id: 'a2b3c4d5e6f748390abcdef012345678'
+                    }
                     package_json: {
                         table: 'sys_module'
                         id: '531f53a3d5ea4e8b81b3490179a9fcad'
