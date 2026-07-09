@@ -9,7 +9,6 @@ Record({
         table: 'sys_update_set',
         action_name: 'scan_and_deploy',
         client: true,
-        onclick: 'Symbol(CallExpressionShape)',
         form_button: true,
         active: true,
         hint: 'Run instance scan, commit to Git, and deploy to test instance',
