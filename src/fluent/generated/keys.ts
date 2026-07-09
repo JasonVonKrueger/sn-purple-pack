@@ -330,6 +330,15 @@ declare global {
                         }
                     },
                     {
+                        table: 'item_option_new'
+                        id: '28a80fe12d694d7e96ae0c22df077083'
+                        key: {
+                            cat_item: '519f41f556654a2ca87fbf08064a02ba'
+                            variable_set: 'NULL'
+                            name: 'api'
+                        }
+                    },
+                    {
                         table: 'sys_documentation'
                         id: '2bda4c044706cb10b1197bb4416d437f'
                         deleted: true
