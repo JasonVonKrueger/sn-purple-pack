@@ -14,7 +14,6 @@ export function IntegrationCreator() {
     const [showUserDropdown, setShowUserDropdown] = useState(false);
     const [restApiOptions, setRestApiOptions] = useState<RestApiOption[]>([]);
     const [resourceOptions, setResourceOptions] = useState<RestApiResourceOption[]>([]);
-    const [prevRestApi, setPrevRestApi] = useState('');
     const nameInputRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -60,35 +59,13 @@ export function IntegrationCreator() {
 
     function handleRestApiChange(e: React.ChangeEvent<HTMLSelectElement>) {
         const newValue = e.target.value;
-        const oldValue = prevRestApi;
 
-        // Adapt the onChange script logic: update the resource value when the REST API changes
-        setForm(prev => {
-            let updatedResource = prev.restApiResource;
-            if (updatedResource) {
-                if (oldValue) {
-                    updatedResource = updatedResource.replace(oldValue, newValue);
-                } else {
-                    updatedResource = updatedResource.replace('{restApi}', newValue);
-                }
-            }
-            return { ...prev, restApi: newValue, restApiResource: updatedResource };
-        });
-
-        setPrevRestApi(newValue);
+        setForm(prev => ({ ...prev, restApi: newValue, restApiResource: '' }));
 
         if (newValue) {
-            fetchRestApiResources(newValue).then(resources => {
-                setResourceOptions(resources);
-                // If the current resource value is no longer valid after API change, clear it
-                setForm(prev => {
-                    const stillValid = resources.some(r => r.sys_id === prev.restApiResource);
-                    return stillValid ? prev : { ...prev, restApiResource: '' };
-                });
-            });
+            fetchRestApiResources(newValue).then(setResourceOptions);
         } else {
             setResourceOptions([]);
-            setForm(prev => ({ ...prev, restApiResource: '' }));
         }
     }
 
@@ -105,7 +82,6 @@ export function IntegrationCreator() {
             setForm(INITIAL_FORM);
             setUserSearch('');
             setResourceOptions([]);
-            setPrevRestApi('');
         } catch (err: any) {
             setResult({ type: 'critical', message: err.message || 'An error occurred' });
         } finally {
@@ -120,7 +96,6 @@ export function IntegrationCreator() {
         setUserOptions([]);
         setShowUserDropdown(false);
         setResourceOptions([]);
-        setPrevRestApi('');
     }
 
     return (
