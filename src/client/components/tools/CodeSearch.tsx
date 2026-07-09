@@ -10,6 +10,8 @@ import {
 } from './CodeSearchService';
 import './ToolContent.css';
 
+const PAGE_SIZE = 20;
+
 function tableBadgeClass(tableKey: string): string {
     switch (tableKey) {
         case 'sys_script_include': return 'pp-badge pp-badge--purple';
@@ -22,6 +24,10 @@ function tableBadgeClass(tableKey: string): string {
     }
 }
 
+function recordUrl(r: CodeSearchResult): string {
+    return `/${r.table}.do?sys_id=${r.sys_id}`;
+}
+
 export function CodeSearch() {
     const [query, setQuery] = useState('');
     const [tableKey, setTableKey] = useState<ScriptTableKey>('all');
@@ -29,6 +35,7 @@ export function CodeSearch() {
     const [total, setTotal] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [page, setPage] = useState(1);
     const inputRef = useRef<HTMLInputElement>(null);
 
     async function handleSearch() {
@@ -36,6 +43,7 @@ export function CodeSearch() {
         if (!trimmed) return;
         setLoading(true);
         setError(null);
+        setPage(1);
         try {
             const res = await searchCode(trimmed, tableKey);
             setResults(res.results);
@@ -58,8 +66,12 @@ export function CodeSearch() {
         setResults([]);
         setTotal(null);
         setError(null);
+        setPage(1);
         inputRef.current?.focus();
     }
+
+    const totalPages = Math.ceil(results.length / PAGE_SIZE);
+    const pagedResults = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
     return (
         <div className="tool-page">
@@ -96,14 +108,14 @@ export function CodeSearch() {
                 <Button
                     label="All Types"
                     variant={tableKey === 'all' ? 'primary' : 'secondary'}
-                    onClicked={() => setTableKey('all')}
+                    onClicked={() => { setTableKey('all'); setPage(1); }}
                 />
                 {SCRIPT_TABLES.map(t => (
                     <Button
                         key={t.key}
                         label={t.label}
                         variant={tableKey === t.key ? 'primary' : 'secondary'}
-                        onClicked={() => setTableKey(t.key as ScriptTableKey)}
+                        onClicked={() => { setTableKey(t.key as ScriptTableKey); setPage(1); }}
                     />
                 ))}
             </div>
@@ -126,12 +138,14 @@ export function CodeSearch() {
                         <span className="tool-list-label">Searching…</span>
                     </div>
                 )}
-                {!loading && results.map(r => (
+                {!loading && pagedResults.map(r => (
                     <div key={`${r.table}-${r.sys_id}`} className="tool-list-item" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
                             <span className="tool-list-label" style={{ fontWeight: 600 }}>
                                 <span className="status-dot status-dot--purple"></span>
-                                {r.name}
+                                <a href={recordUrl(r)} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
+                                    {r.name}
+                                </a>
                                 {r.scope_label && r.scope_label !== 'Global' && (
                                     <span style={{ fontWeight: 400, opacity: 0.7 }}> ({r.scope_label})</span>
                                 )}
@@ -154,6 +168,26 @@ export function CodeSearch() {
                     </div>
                 )}
             </div>
+
+            {!loading && totalPages > 1 && (
+                <div className="tool-pagination">
+                    <button
+                        className="tool-pagination-btn"
+                        disabled={page === 1}
+                        onClick={() => setPage(p => p - 1)}
+                    >
+                        Previous
+                    </button>
+                    <span className="tool-pagination-info">Page {page} of {totalPages}</span>
+                    <button
+                        className="tool-pagination-btn"
+                        disabled={page === totalPages}
+                        onClick={() => setPage(p => p + 1)}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
