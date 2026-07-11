@@ -34,7 +34,11 @@ function buildHeaders(): Record<string, string> {
     }
 }
 
-/** Returns a UTC datetime string suitable for ServiceNow encoded queries. */
+/**
+ * Returns a UTC datetime string in the format ServiceNow encoded queries expect:
+ * "YYYY-MM-DD HH:MM:SS" (no timezone suffix, no milliseconds).
+ * ServiceNow stores datetimes as UTC and accepts this format in sysparm_query values.
+ */
 function hoursAgo(hours: number): string {
     return new Date(Date.now() - hours * 3_600_000).toISOString().replace('T', ' ').slice(0, 19)
 }
@@ -204,6 +208,8 @@ async function checkSystemLog(): Promise<HealthCategory> {
     if (errors1h < 0) {
         findings.push({ level: 'info', message: 'System log not accessible.' })
     } else {
+        // Threshold of 100 errors/hour matches the original health-check script baseline.
+        // Adjust if your instance routinely produces higher error volumes at rest.
         if (errors1h > 100) {
             findings.push({ level: 'critical', message: `Error log volume unusually high — ${errors1h.toLocaleString()} errors in the last hour. Possible active incident.` })
         } else {
@@ -215,7 +221,10 @@ async function checkSystemLog(): Promise<HealthCategory> {
 }
 
 // ---------------------------------------------------------------------------
-// 7. Table Growth (top 5 largest custom u_ tables)
+// 7. Table Growth — samples the 5 most-recently-updated custom u_ tables
+//    and reports their current row counts. Full row-count ordering is too
+//    expensive to run client-side, so recently-active tables serve as a
+//    practical proxy for tables worth monitoring.
 // ---------------------------------------------------------------------------
 async function checkTableGrowth(): Promise<HealthCategory> {
     const findings: HealthFinding[] = []
@@ -223,6 +232,9 @@ async function checkTableGrowth(): Promise<HealthCategory> {
     const res = await fetch(
         '/api/now/table/sys_db_object?' +
             new URLSearchParams({
+                // Sort by most recently updated as a practical proxy for
+                // active tables; a true largest-by-row-count sort would
+                // require a separate count query for every table.
                 sysparm_query: 'nameSTARTSWITHu_^ORDERBYDESCsys_updated_on',
                 sysparm_fields: 'name,label',
                 sysparm_limit: '50',

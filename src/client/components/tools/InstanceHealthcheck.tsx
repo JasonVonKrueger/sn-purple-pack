@@ -103,7 +103,7 @@ export function InstanceHealthcheck() {
             {!result && !loading && !error && (
                 <div className="tool-list">
                     <div className="health-empty-state">
-                        <span className="health-empty-icon">⚕</span>
+                        <span className="health-empty-icon" aria-hidden="true">⚕</span>
                         <p className="health-empty-title">Ready to check your instance</p>
                         <p className="health-empty-sub">Click "Run Health Check" to analyze 7 health categories in parallel.</p>
                     </div>
@@ -115,7 +115,7 @@ export function InstanceHealthcheck() {
                 <>
                     {/* Summary banner */}
                     <div className={`health-summary-banner health-summary-banner--${overallStatus}`}>
-                        <span className="health-summary-icon">
+                        <span className="health-summary-icon" aria-hidden="true">
                             {overallStatus === 'ok' && '✓'}
                             {overallStatus === 'warning' && '⚠'}
                             {overallStatus === 'critical' && '✕'}
