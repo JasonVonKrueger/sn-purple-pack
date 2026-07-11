@@ -82,6 +82,7 @@ export function IntegrationCreator() {
             setForm(INITIAL_FORM);
             setUserSearch('');
             setResourceOptions([]);
+            setRestApiOptions([]);
         } catch (err: any) {
             setResult({ type: 'critical', message: err.message || 'An error occurred' });
         } finally {
@@ -96,6 +97,7 @@ export function IntegrationCreator() {
         setUserOptions([]);
         setShowUserDropdown(false);
         setResourceOptions([]);
+        setRestApiOptions([]);
     }
 
     return (
