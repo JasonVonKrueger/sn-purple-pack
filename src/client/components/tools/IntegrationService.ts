@@ -158,21 +158,6 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     if (!oauthRes.ok) throw new Error('Failed to create OAuth application')
     const oauthData = await oauthRes.json()
 
-<<<<<<< HEAD
-    // Pick a random REST API endpoint (sys_ws_definition)
-    const apiRes = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=20', {
-        headers,
-    })
-    let randomApiSysId = ''
-    let randomApiName = ''
-    if (apiRes.ok) {
-        const apiData = await apiRes.json()
-        const apis: { sys_id: string; name: string }[] = apiData.result ?? []
-        if (apis.length > 0) {
-            const picked = apis[Math.floor(Math.random() * apis.length)]
-            randomApiSysId = picked.sys_id
-            randomApiName = picked.name
-=======
     // Use the selected REST API if provided
     const selectedApiSysId = form.restApi || ''
     let selectedApiName = ''
@@ -181,7 +166,6 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
         if (apiRes.ok) {
             const apiData = await apiRes.json()
             selectedApiName = apiData.result?.name ?? ''
->>>>>>> origin/copilot/add-resource-select-box
         }
     }
 
