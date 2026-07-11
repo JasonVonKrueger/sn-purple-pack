@@ -45,6 +45,26 @@ async function fetchCount(): Promise<number> {
     return parseInt(data.result?.stats?.count ?? '0', 10);
 }
 
+interface DisplayValue {
+    value: string;
+    display_value?: string;
+}
+
+interface RawUpdateSetRecord {
+    sys_id: DisplayValue | string;
+    name: DisplayValue | string;
+    state: DisplayValue | string;
+    application: DisplayValue | string;
+    sys_updated_on: DisplayValue | string;
+    sys_updated_by: DisplayValue | string;
+}
+
+function displayVal(field: DisplayValue | string | undefined): string {
+    if (!field) return '';
+    if (typeof field === 'string') return field;
+    return field.display_value ?? field.value ?? '';
+}
+
 export async function fetchCompletedUpdateSets(params: FetchUpdateSetsParams): Promise<UpdateSetsResult> {
     const { page, pageSize } = params;
 
@@ -68,13 +88,13 @@ export async function fetchCompletedUpdateSets(params: FetchUpdateSetsParams): P
     }
 
     const setsData = await setsRes.json();
-    const entries: UpdateSetEntry[] = (setsData.result ?? []).map((r: any) => ({
-        sys_id: r.sys_id?.value ?? r.sys_id,
-        name: r.name?.display_value ?? r.name?.value ?? r.name,
-        state: r.state?.display_value ?? r.state?.value ?? r.state,
-        scope: r.application?.display_value ?? 'Global',
-        sys_updated_on: r.sys_updated_on?.display_value ?? r.sys_updated_on?.value ?? r.sys_updated_on,
-        sys_updated_by: r.sys_updated_by?.display_value ?? r.sys_updated_by?.value ?? r.sys_updated_by,
+    const entries: UpdateSetEntry[] = (setsData.result ?? [] as RawUpdateSetRecord[]).map((r: RawUpdateSetRecord) => ({
+        sys_id: displayVal(r.sys_id),
+        name: displayVal(r.name),
+        state: displayVal(r.state),
+        scope: displayVal(r.application) || 'Global',
+        sys_updated_on: displayVal(r.sys_updated_on),
+        sys_updated_by: displayVal(r.sys_updated_by),
     }));
 
     return { entries, totalCount };
