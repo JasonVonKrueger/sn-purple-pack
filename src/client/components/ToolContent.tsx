@@ -8,6 +8,7 @@ import { UpdateSetTracker } from './tools/UpdateSetTracker';
 import { InstanceHealthcheck } from './tools/InstanceHealthcheck';
 import { IntegrationCreator } from './tools/IntegrationCreator';
 import { PeerReview } from './tools/PeerReview';
+import { Deployment } from './tools/Deployment';
 
 interface ToolContentProps {
     activeTool: string;
@@ -24,6 +25,7 @@ export function ToolContent({ activeTool }: ToolContentProps) {
         case 'instance-healthcheck': return <InstanceHealthcheck />;
         case 'integration-creator': return <IntegrationCreator />;
         case 'peer-review': return <PeerReview />;
+        case 'deployment': return <Deployment />;
         default: return <ScriptAnalyzer />;
     }
 }
