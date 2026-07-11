@@ -13,11 +13,11 @@ Record({
         active: true,
         hint: 'Run instance scan, commit to Git, and deploy to test instance',
         order: 100,
-        script: `function onClick(g_form) {
-    const modal = new GlideModal('scan_and_deploy');
-    modal.setTitle('Scan & Deploy');
-    modal.setWidth(900);
-    modal.render();
+        script: `function showScanAndDeployModal() {
+    var dialog = new GlideModal('scan_and_deploy', true, 600);
+    dialog.setTitle('Scan & Deploy');
+    dialog.setPreference('sysparm_update_set', g_form.getUniqueValue());
+    dialog.render();
 }`,
         form_action: true,
         form_button_v2: false,
@@ -43,5 +43,12 @@ Record({
         sys_domain_path: '/',
         ui11_compatible: false,
         ui16_compatible: false,
+        client_script_v2: `function onClick(g_form) {
+    const modal = new GlideModal('scan_and_deploy');
+    modal.setTitle('Scan & Deploy');
+    modal.setWidth(900);
+    modal.render();
+}`,
+        onclick: 'showScanAndDeployModal()',
     },
 })
