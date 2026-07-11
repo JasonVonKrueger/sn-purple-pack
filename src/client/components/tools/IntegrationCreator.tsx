@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Input, InputValueSet } from '@servicenow/react-components/Input';
 import { Button } from '@servicenow/react-components/Button';
 import { Alert } from '@servicenow/react-components/Alert';
-import { IntegrationFormState, IntegrationResult, UserOption, INITIAL_FORM, createIntegration, searchUsers, deriveUsername } from './IntegrationService';
+import { IntegrationFormState, IntegrationResult, UserOption, RestApiOption, RestApiResourceOption, INITIAL_FORM, createIntegration, searchUsers, fetchRestApis, fetchRestApiResources } from './IntegrationService';
 import './ToolContent.css';
 
 export function IntegrationCreator() {
@@ -12,11 +12,17 @@ export function IntegrationCreator() {
     const [userOptions, setUserOptions] = useState<UserOption[]>([]);
     const [userSearch, setUserSearch] = useState('');
     const [showUserDropdown, setShowUserDropdown] = useState(false);
+    const [restApiOptions, setRestApiOptions] = useState<RestApiOption[]>([]);
+    const [resourceOptions, setResourceOptions] = useState<RestApiResourceOption[]>([]);
     const nameInputRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const el = nameInputRef.current?.querySelector?.('input');
         if (el) el.focus();
+    }, []);
+
+    useEffect(() => {
+        fetchRestApis().then(setRestApiOptions);
     }, []);
 
     useEffect(() => {
@@ -51,6 +57,22 @@ export function IntegrationCreator() {
         setShowUserDropdown(false);
     }
 
+    function handleRestApiChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        const newValue = e.target.value;
+
+        setForm(prev => ({ ...prev, restApi: newValue, restApiResource: '' }));
+
+        if (newValue) {
+            fetchRestApiResources(newValue).then(setResourceOptions);
+        } else {
+            setResourceOptions([]);
+        }
+    }
+
+    function handleResourceChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        setForm(prev => ({ ...prev, restApiResource: e.target.value }));
+    }
+
     async function handleCreate() {
         setLoading(true);
         setResult(null);
@@ -59,6 +81,7 @@ export function IntegrationCreator() {
             setResult(res);
             setForm(INITIAL_FORM);
             setUserSearch('');
+            setResourceOptions([]);
         } catch (err: any) {
             setResult({ type: 'critical', message: err.message || 'An error occurred' });
         } finally {
@@ -72,6 +95,7 @@ export function IntegrationCreator() {
         setUserSearch('');
         setUserOptions([]);
         setShowUserDropdown(false);
+        setResourceOptions([]);
     }
 
     return (
@@ -118,6 +142,33 @@ export function IntegrationCreator() {
                     </div>
                     <div>
                         <Input label="How many requests per hour" value={form.requestsPerHour} onValueSet={updateField('requestsPerHour')} placeholder="e.g. 500" />
+                    </div>
+                    <div className="pp-select-wrap">
+                        <label className="pp-select-label">REST API</label>
+                        <select
+                            className="pp-select"
+                            value={form.restApi}
+                            onChange={handleRestApiChange}
+                        >
+                            <option value="">— Select a REST API —</option>
+                            {restApiOptions.map(api => (
+                                <option key={api.sys_id} value={api.sys_id}>{api.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="pp-select-wrap">
+                        <label className="pp-select-label">Resource</label>
+                        <select
+                            className="pp-select"
+                            value={form.restApiResource}
+                            onChange={handleResourceChange}
+                            disabled={!form.restApi || resourceOptions.length === 0}
+                        >
+                            <option value="">— Select a Resource —</option>
+                            {resourceOptions.map(r => (
+                                <option key={r.sys_id} value={r.sys_id}>{r.name}{r.http_path ? ` (${r.http_path})` : ''}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="tool-grid-full">
                         <label className="pp-textarea-label">Short Description</label>
