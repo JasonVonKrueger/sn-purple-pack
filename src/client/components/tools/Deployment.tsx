@@ -68,7 +68,7 @@ export function Deployment() {
                 <Button
                     label="Refresh"
                     variant="secondary"
-                    icon="refresh-fill"
+                    icon="rotate-clockwise-fill"
                     disabled={loading}
                     onClicked={() => { setSelectedId(null); load(page); }}
                 />
