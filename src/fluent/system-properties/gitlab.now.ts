@@ -22,7 +22,7 @@ Record({
     table: 'sys_properties',
     data: {
         name: 'x_1892699_purple_pack.gitlab.token',
-        value: `{{dflt-gpaes}}SI1M3/30Ifa5JZgt0NOm84yQ/CU4eeERMnoNGXVTPPCE9JVVeWZ7BvIUFYaJ98pBUGmDXB7mNzfX\r
+        value: `{{dflt-gpaes}}SI1M3/30Ifa5JZgt0NOm84yQ/CU4eeERMnoNGXVTPPCE9JVVeWZ7BvIUFYaJ98pBUGmDXB7mNzfX
 VxtjHYO59w==`,
         description: 'Personal / project access token for GitLab API authentication',
         type: 'password2',

@@ -17,8 +17,12 @@ export const INITIAL_FORM: IntegrationFormState = {
 }
 
 export function deriveUsername(integrationName: string): string {
-    const normalized = integrationName.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-    return `SV-IT-SNC-${normalized}`;
+    const normalized = integrationName
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+    return `SV-IT-SNC-${normalized}`
 }
 
 export interface UserOption {
@@ -58,7 +62,7 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
         'X-UserToken': (window as any).g_ck,
     }
 
-    const username = deriveUsername(form.integrationName);
+    const username = deriveUsername(form.integrationName)
 
     // Create service account
     const userRes = await fetch('/api/now/table/sys_user', {
@@ -79,7 +83,10 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     // Assign required roles to the service account
     const roleNames = ['oauth_user', 'snc_platform_rest_api_access']
     for (const roleName of roleNames) {
-        const roleRes = await fetch(`/api/now/table/sys_user_role?sysparm_query=name=${roleName}&sysparm_fields=sys_id&sysparm_limit=1`, { headers })
+        const roleRes = await fetch(
+            `/api/now/table/sys_user_role?sysparm_query=name=${roleName}&sysparm_fields=sys_id&sysparm_limit=1`,
+            { headers }
+        )
         if (!roleRes.ok) throw new Error(`Failed to look up role: ${roleName}`)
         const roleData = await roleRes.json()
         const roleSysId = roleData.result?.[0]?.sys_id
@@ -109,7 +116,9 @@ export async function createIntegration(form: IntegrationFormState): Promise<Int
     const oauthData = await oauthRes.json()
 
     // Pick a random REST API endpoint (sys_ws_definition)
-    const apiRes = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=20', { headers })
+    const apiRes = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=20', {
+        headers,
+    })
     let randomApiSysId = ''
     let randomApiName = ''
     if (apiRes.ok) {

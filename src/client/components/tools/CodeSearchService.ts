@@ -30,11 +30,11 @@ export interface ScriptTableMeta {
 
 export const SCRIPT_TABLES: ScriptTableMeta[] = [
     { key: 'sys_script_include', label: 'Script Include', scriptField: 'script', nameField: 'name' },
-    { key: 'sys_script_client',  label: 'Client Script',  scriptField: 'script', nameField: 'name' },
-    { key: 'sys_script',         label: 'Scheduled Job',  scriptField: 'script', nameField: 'name' },
-    { key: 'sys_business_rule',  label: 'Business Rule',  scriptField: 'script', nameField: 'name' },
-    { key: 'sys_ui_script',      label: 'UI Script',      scriptField: 'script', nameField: 'name' },
-    { key: 'sys_ui_action',      label: 'UI Action',      scriptField: 'script', nameField: 'name' },
+    { key: 'sys_script_client', label: 'Client Script', scriptField: 'script', nameField: 'name' },
+    { key: 'sys_script', label: 'Scheduled Job', scriptField: 'script', nameField: 'name' },
+    { key: 'sys_business_rule', label: 'Business Rule', scriptField: 'script', nameField: 'name' },
+    { key: 'sys_ui_script', label: 'UI Script', scriptField: 'script', nameField: 'name' },
+    { key: 'sys_ui_action', label: 'UI Action', scriptField: 'script', nameField: 'name' },
 ]
 
 export const LIMIT_PER_TABLE = 10
@@ -42,7 +42,8 @@ const LIMIT_SINGLE_TABLE = 25
 
 function getSessionToken(): string {
     const token = (window as unknown as Record<string, unknown>).g_ck
-    if (typeof token !== 'string' || !token) throw new Error('Unable to authenticate request. Please refresh the page and try again.')
+    if (typeof token !== 'string' || !token)
+        throw new Error('Unable to authenticate request. Please refresh the page and try again.')
     return token
 }
 
@@ -103,11 +104,11 @@ export async function searchCode(query: string, tableKey: ScriptTableKey): Promi
 
     if (tableKey === 'all') {
         const settled = await Promise.allSettled(
-            SCRIPT_TABLES.map(meta => searchTable(meta, trimmed, LIMIT_PER_TABLE))
+            SCRIPT_TABLES.map((meta) => searchTable(meta, trimmed, LIMIT_PER_TABLE))
         )
-        results = settled.flatMap(s => (s.status === 'fulfilled' ? s.value : []))
+        results = settled.flatMap((s) => (s.status === 'fulfilled' ? s.value : []))
     } else {
-        const meta = SCRIPT_TABLES.find(t => t.key === tableKey)
+        const meta = SCRIPT_TABLES.find((t) => t.key === tableKey)
         if (!meta) return { results: [], total: 0 }
         results = await searchTable(meta, trimmed, LIMIT_SINGLE_TABLE)
     }
