@@ -480,6 +480,95 @@
    Code Search
    ========================================================= */
 
+/* =========================================================
+   Deployment
+   ========================================================= */
+
+.deployment-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+    background-color: rgb(var(--now-color_background--primary, 255,255,255));
+}
+
+.deployment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.deployment-th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(var(--now-color_text--secondary, 100,106,109));
+    border-bottom: 2px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+    white-space: nowrap;
+    background-color: rgb(var(--now-color_background--secondary, 248,248,248));
+}
+
+.deployment-th--select {
+    width: 36px;
+    padding-left: 14px;
+}
+
+.deployment-td {
+    padding: 10px 14px;
+    color: rgb(var(--now-color_text--primary, 41,41,41));
+    border-bottom: 1px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+    vertical-align: middle;
+}
+
+.deployment-td--select {
+    width: 36px;
+    padding-left: 14px;
+}
+
+.deployment-td--name {
+    font-weight: 500;
+}
+
+.deployment-td--mono {
+    font-size: 12px;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    white-space: nowrap;
+}
+
+.deployment-td--empty {
+    text-align: center;
+    color: rgb(var(--now-color_text--tertiary, 150,155,158));
+    padding: 32px 14px;
+}
+
+.deployment-row {
+    cursor: pointer;
+    transition: background-color 0.1s;
+}
+
+.deployment-row:hover {
+    background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
+}
+
+.deployment-row--selected {
+    background-color: rgba(148,96,183,0.10);
+}
+
+.deployment-row--selected:hover {
+    background-color: rgba(148,96,183,0.15);
+}
+
+.deployment-row:last-child .deployment-td {
+    border-bottom: none;
+}
+
+.deployment-radio {
+    width: 16px;
+    height: 16px;
+    accent-color: rgb(var(--now-color_grouped--purple-3, 148,96,183));
+    cursor: pointer;
+}
+
 .code-search-snippet {
     font-size: 12px;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
