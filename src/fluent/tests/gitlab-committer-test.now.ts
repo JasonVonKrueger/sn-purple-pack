@@ -111,7 +111,7 @@ describe('GitLabCommitter - empty update set', function() {
 
     beforeEach(function() {
         var gr = new GlideRecord('sys_update_set');
-        gr.setValue('name', 'ATF_GitLabCommitter_Temp_' + new GlideDateTime().getNumericValue());
+        gr.setValue('name', 'ATF_GitLabCommitter_Temp_' + gs.generateGUID());
         gr.setValue('state', 'in progress');
         testUpdateSetId = gr.insert();
     });
@@ -153,7 +153,7 @@ describe('GitLabCommitter - file name sanitisation', function() {
     // Replicates the safeName + path logic from commitUpdateSet
     function toFilePath(directory, updateSetName) {
         var safeName = updateSetName
-            .replace(/[^a-zA-Z0-9_\\-]/g, '_')
+            .replace(/[^a-zA-Z0-9_-]/g, '_')
             .replace(/_+/g, '_')
             .toLowerCase();
         return directory + '/' + safeName + '.xml';
