@@ -336,6 +336,150 @@
     white-space: nowrap;
 }
 
+/* =========================================================
+   Instance Health Check
+   ========================================================= */
+
+.health-summary-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.health-summary-banner--ok {
+    background-color: rgba(73, 168, 68, 0.10);
+    color: rgb(var(--now-color_grouped--green-2, 73,168,68));
+}
+
+.health-summary-banner--warning {
+    background-color: rgba(224, 183, 28, 0.12);
+    color: rgb(168, 137, 21);
+}
+
+.health-summary-banner--critical {
+    background-color: rgba(201, 54, 2, 0.10);
+    color: rgb(var(--now-color_grouped--red-2, 201,54,2));
+}
+
+.health-summary-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.health-last-run {
+    font-size: 12px;
+    color: rgb(var(--now-color_text--tertiary, 150,155,158));
+    align-self: center;
+}
+
+.health-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.health-category-card {
+    background-color: rgb(var(--now-color_background--primary, 255,255,255));
+    border-radius: 8px;
+    border: 1px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+    border-left: 4px solid transparent;
+    overflow: hidden;
+}
+
+.health-category-card--ok {
+    border-left-color: rgb(var(--now-color_grouped--green-2, 73,168,68));
+}
+
+.health-category-card--warning {
+    border-left-color: rgb(var(--now-color_grouped--yellow-2, 224,183,28));
+}
+
+.health-category-card--critical {
+    border-left-color: rgb(var(--now-color_grouped--red-2, 201,54,2));
+}
+
+.health-category-card--unknown {
+    border-left-color: rgb(var(--now-color_surface--divider-1, 200,204,207));
+}
+
+.health-category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+}
+
+.health-category-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(var(--now-color_text--primary, 41,41,41));
+}
+
+.health-findings {
+    padding: 0;
+}
+
+.health-finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 9px 16px;
+    border-bottom: 1px solid rgb(var(--now-color_surface--divider-1, 241,242,243));
+}
+
+.health-finding:last-child {
+    border-bottom: none;
+}
+
+.health-finding .status-dot {
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.health-finding-text {
+    font-size: 13px;
+    color: rgb(var(--now-color_text--primary, 41,41,41));
+    line-height: 1.5;
+}
+
+.health-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    gap: 8px;
+}
+
+.health-empty-icon {
+    font-size: 40px;
+    margin-bottom: 4px;
+    opacity: 0.4;
+}
+
+.health-empty-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(var(--now-color_text--secondary, 100,106,109));
+    margin: 0;
+}
+
+.health-empty-sub {
+    font-size: 13px;
+    color: rgb(var(--now-color_text--tertiary, 150,155,158));
+    margin: 0;
+}
+
+/* =========================================================
+   Code Search
+   ========================================================= */
+
 .code-search-snippet {
     font-size: 12px;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
