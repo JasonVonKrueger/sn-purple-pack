@@ -79,7 +79,7 @@ export async function searchRestApis(query: string): Promise<RestApiOption[]> {
         'X-UserToken': (window as any).g_ck,
     }
     const params = new URLSearchParams({
-        sysparm_query: `nameLIKE${query}^active=true^ORDERBYname`,
+        sysparm_query: `nameLIKE${query}^ORDERBYname`,
         sysparm_fields: 'sys_id,name',
         sysparm_limit: '10',
     })
