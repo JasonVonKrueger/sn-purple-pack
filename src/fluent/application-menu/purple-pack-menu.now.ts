@@ -8,7 +8,7 @@ Record({
         title: 'Purple Pack',
         active: true,
         category: 'custom',
-        roles: 'admin',
+        roles: ['admin'],
     },
 })
 
@@ -23,7 +23,7 @@ Record({
         url: '/purple_pack.do',
         order: 100,
         active: true,
-        roles: 'admin',
+        roles: ['admin'],
     },
 })
 
@@ -38,6 +38,6 @@ Record({
         url: '/sys_properties_list.do?sysparm_query=nameSTARTSWITHx_1892699&sysparm_view=',
         order: 200,
         active: true,
-        roles: 'admin',
+        roles: ['admin'],
     },
 })
