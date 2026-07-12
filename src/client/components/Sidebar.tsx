@@ -9,15 +9,15 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-    { id: 'script-analyzer', label: 'Script Analyzer', icon: 'code-search-fill' },
-    { id: 'table-inspector', label: 'Table Inspector', icon: 'table-search-fill' },
-    { id: 'log-viewer', label: 'Log Viewer', icon: 'document-fill' },
     { id: 'code-search', label: 'Code Search', icon: 'list-search-fill' },
-    { id: 'update-set-tracker', label: 'Update Set Tracker', icon: 'change-fill' },
+    { id: 'deployment', label: 'Deployment', icon: 'rocketship-fill' },
     { id: 'instance-healthcheck', label: 'Instance Healthcheck', icon: 'health-status-fill' },
     { id: 'integration-creator', label: 'Integration Creator', icon: 'plug-fill' },
+    { id: 'log-viewer', label: 'Log Viewer', icon: 'document-fill' },
     { id: 'peer-review', label: 'Peer Review', icon: 'user-group-fill' },
-    { id: 'deployment', label: 'Deployment', icon: 'rocketship-fill' },
+    { id: 'script-analyzer', label: 'Script Analyzer', icon: 'code-search-fill' },
+    { id: 'table-inspector', label: 'Table Inspector', icon: 'table-search-fill' },
+    { id: 'update-set-tracker', label: 'Update Set Tracker', icon: 'change-fill' },
 ];
 
 interface SidebarProps {
