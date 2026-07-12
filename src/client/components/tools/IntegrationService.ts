@@ -6,6 +6,7 @@ export interface IntegrationFormState {
     requestsPerHour: string
     throttleAcknowledged: boolean
     restApi: string
+    restApiName: string
     restApiResource: string
 }
 
@@ -17,6 +18,7 @@ export const INITIAL_FORM: IntegrationFormState = {
     requestsPerHour: '',
     throttleAcknowledged: false,
     restApi: '',
+    restApiName: '',
     restApiResource: '',
 }
 
@@ -70,12 +72,18 @@ export interface IntegrationResult {
     message: string
 }
 
-export async function fetchRestApis(): Promise<RestApiOption[]> {
+export async function searchRestApis(query: string): Promise<RestApiOption[]> {
+    if (!query) return []
     const headers = {
         Accept: 'application/json',
         'X-UserToken': (window as any).g_ck,
     }
-    const res = await fetch('/api/now/table/sys_ws_definition?sysparm_fields=sys_id,name&sysparm_limit=100&sysparm_query=active=true^ORDERBYname', { headers })
+    const params = new URLSearchParams({
+        sysparm_query: `nameLIKE${query}^active=true^ORDERBYname`,
+        sysparm_fields: 'sys_id,name',
+        sysparm_limit: '10',
+    })
+    const res = await fetch(`/api/now/table/sys_ws_definition?${params}`, { headers })
     if (!res.ok) return []
     const data = await res.json()
     return (data.result ?? []).map((r: any) => ({ sys_id: r.sys_id, name: r.name }))

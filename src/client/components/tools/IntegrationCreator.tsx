@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Input, InputValueSet } from '@servicenow/react-components/Input';
 import { Button } from '@servicenow/react-components/Button';
 import { Alert } from '@servicenow/react-components/Alert';
-import { IntegrationFormState, IntegrationResult, UserOption, RestApiOption, RestApiResourceOption, INITIAL_FORM, createIntegration, searchUsers, fetchRestApis, fetchRestApiResources } from './IntegrationService';
+import { IntegrationFormState, IntegrationResult, UserOption, RestApiOption, RestApiResourceOption, INITIAL_FORM, createIntegration, searchUsers, searchRestApis, fetchRestApiResources } from './IntegrationService';
 import './ToolContent.css';
 
 export function IntegrationCreator() {
@@ -13,16 +13,14 @@ export function IntegrationCreator() {
     const [userSearch, setUserSearch] = useState('');
     const [showUserDropdown, setShowUserDropdown] = useState(false);
     const [restApiOptions, setRestApiOptions] = useState<RestApiOption[]>([]);
+    const [restApiSearch, setRestApiSearch] = useState('');
+    const [showRestApiDropdown, setShowRestApiDropdown] = useState(false);
     const [resourceOptions, setResourceOptions] = useState<RestApiResourceOption[]>([]);
     const nameInputRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const el = nameInputRef.current?.querySelector?.('input');
         if (el) el.focus();
-    }, []);
-
-    useEffect(() => {
-        fetchRestApis().then(setRestApiOptions);
     }, []);
 
     useEffect(() => {
@@ -37,6 +35,21 @@ export function IntegrationCreator() {
         }, 250);
         return () => clearTimeout(timer);
     }, [userSearch, form.integrationOwner]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (restApiSearch && !form.restApi) {
+                searchRestApis(restApiSearch).then(opts => {
+                    setRestApiOptions(opts);
+                    setShowRestApiDropdown(true);
+                });
+            } else {
+                setRestApiOptions([]);
+                setShowRestApiDropdown(false);
+            }
+        }, 250);
+        return () => clearTimeout(timer);
+    }, [restApiSearch, form.restApi]);
 
     function updateField(field: keyof IntegrationFormState) {
         return ((event: any) => {
@@ -57,16 +70,19 @@ export function IntegrationCreator() {
         setShowUserDropdown(false);
     }
 
-    function handleRestApiChange(e: React.ChangeEvent<HTMLSelectElement>) {
-        const newValue = e.target.value;
+    function handleRestApiSearch(e: React.ChangeEvent<HTMLInputElement>) {
+        const value = e.target.value;
+        setRestApiSearch(value);
+        setForm(prev => ({ ...prev, restApi: '', restApiName: value, restApiResource: '' }));
+        setResourceOptions([]);
+    }
 
-        setForm(prev => ({ ...prev, restApi: newValue, restApiResource: '' }));
-
-        if (newValue) {
-            fetchRestApiResources(newValue).then(setResourceOptions);
-        } else {
-            setResourceOptions([]);
-        }
+    function selectRestApi(api: RestApiOption) {
+        setForm(prev => ({ ...prev, restApi: api.sys_id, restApiName: api.name, restApiResource: '' }));
+        setRestApiSearch('');
+        setRestApiOptions([]);
+        setShowRestApiDropdown(false);
+        fetchRestApiResources(api.sys_id).then(setResourceOptions);
     }
 
     function handleResourceChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -81,8 +97,8 @@ export function IntegrationCreator() {
             setResult(res);
             setForm(INITIAL_FORM);
             setUserSearch('');
+            setRestApiSearch('');
             setResourceOptions([]);
-            setRestApiOptions([]);
         } catch (err: any) {
             setResult({ type: 'critical', message: err.message || 'An error occurred' });
         } finally {
@@ -96,8 +112,10 @@ export function IntegrationCreator() {
         setUserSearch('');
         setUserOptions([]);
         setShowUserDropdown(false);
-        setResourceOptions([]);
+        setRestApiSearch('');
         setRestApiOptions([]);
+        setShowRestApiDropdown(false);
+        setResourceOptions([]);
     }
 
     return (
@@ -145,18 +163,27 @@ export function IntegrationCreator() {
                     <div>
                         <Input label="How many requests per hour" value={form.requestsPerHour} onValueSet={updateField('requestsPerHour')} placeholder="e.g. 500" />
                     </div>
-                    <div className="pp-select-wrap">
-                        <label className="pp-select-label">REST API</label>
-                        <select
-                            className="pp-select"
-                            value={form.restApi}
-                            onChange={handleRestApiChange}
-                        >
-                            <option value="">— Select a REST API —</option>
-                            {restApiOptions.map(api => (
-                                <option key={api.sys_id} value={api.sys_id}>{api.name}</option>
-                            ))}
-                        </select>
+                    <div className="pp-reference-wrap">
+                        <div className="pp-owner-input-wrap">
+                            <label className="pp-owner-input-label">REST API</label>
+                            <input
+                                className="pp-owner-input"
+                                type="text"
+                                value={form.restApiName}
+                                onChange={handleRestApiSearch}
+                                placeholder="Search for a REST API..."
+                                autoComplete="off"
+                            />
+                        </div>
+                        {showRestApiDropdown && restApiOptions.length > 0 && (
+                            <div className="pp-owner-dropdown">
+                                {restApiOptions.map(api => (
+                                    <button key={api.sys_id} className="pp-owner-dropdown-item" type="button" aria-label={`Select ${api.name}`} onMouseDown={() => selectRestApi(api)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); selectRestApi(api); } }}>
+                                        {api.name}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className="pp-select-wrap">
                         <label className="pp-select-label">Resource</label>
