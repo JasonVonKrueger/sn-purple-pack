@@ -207,6 +207,18 @@ declare global {
                         table: 'sys_hub_trigger_instance_v2'
                         id: '38acf7f34bf641dc9257e833bafa334d'
                     }
+                    purple_pack_app_menu: {
+                        table: 'sys_app_application'
+                        id: 'b8e4f2a947c0d3e5f61978bb4416d4a0'
+                    }
+                    pp_control_board_module: {
+                        table: 'sys_app_module'
+                        id: 'c9f5a3ba58d1e4f607208acc5527e5b1'
+                    }
+                    pp_properties_module: {
+                        table: 'sys_app_module'
+                        id: 'd0a6b4cb69e2f5071831aadd6638f6c2'
+                    }
                 }
                 composite: [
                     {
