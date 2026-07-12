@@ -17,7 +17,7 @@ const NAV_ITEMS: NavItem[] = [
     { id: 'instance-healthcheck', label: 'Instance Healthcheck', icon: 'health-status-fill' },
     { id: 'integration-creator', label: 'Integration Creator', icon: 'plug-fill' },
     { id: 'peer-review', label: 'Peer Review', icon: 'user-group-fill' },
-    { id: 'deployment', label: 'Deployment', icon: 'rocket-fill' },
+    { id: 'deployment', label: 'Deployment', icon: 'rocketship-fill' },
 ];
 
 interface SidebarProps {
