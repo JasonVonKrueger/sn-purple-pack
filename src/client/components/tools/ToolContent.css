@@ -282,16 +282,19 @@
 .pp-select {
     width: 100%;
     box-sizing: border-box;
-    padding: 8px 10px;
+    padding: 8px 30px 8px 10px;
     border: 1px solid rgb(var(--now-color_surface--divider-1, 200,204,207));
     border-radius: 4px;
     font-size: 14px;
     font-family: inherit;
     color: rgb(var(--now-color_text--primary, 41,41,41));
     background-color: rgb(var(--now-color_background--primary, 255,255,255));
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23646a6d' d='M1 4l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
     outline: none;
     transition: border-color 0.15s;
-    appearance: auto;
+    appearance: none;
     cursor: pointer;
 }
 
