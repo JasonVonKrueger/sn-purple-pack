@@ -219,6 +219,10 @@ declare global {
                         table: 'sys_app_module'
                         id: 'd0a6b4cb69e2f5071831aadd6638f6c2'
                     }
+                    validate_update_set_name: {
+                        table: 'sys_script'
+                        id: 'e1f2a3b4c5d64e7f8a9b0c1d2e3f4a5b'
+                    }
                 }
                 composite: [
                     {
