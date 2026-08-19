@@ -14,11 +14,11 @@ const PAGE_SIZE = 20;
 
 function tableBadgeClass(tableKey: string): string {
     switch (tableKey) {
-        case 'sys_script_include': return 'pp-badge pp-badge--purple';
+        case 'sys_script_include': return 'pp-badge pp-badge--blue';
         case 'sys_script_client':  return 'pp-badge pp-badge--green';
         case 'sys_business_rule':  return 'pp-badge pp-badge--yellow';
         case 'sys_script':         return 'pp-badge pp-badge--red';
-        case 'sys_ui_script':      return 'pp-badge pp-badge--purple';
+        case 'sys_ui_script':      return 'pp-badge pp-badge--blue';
         case 'sys_ui_action':      return 'pp-badge pp-badge--green';
         default:                   return 'pp-badge';
     }
@@ -159,7 +159,7 @@ export function CodeSearch() {
                     <div key={`${r.table}-${r.sys_id}`} className="tool-list-item" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '4px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
                             <span className="tool-list-label" style={{ fontWeight: 600 }}>
-                                <span className="status-dot status-dot--purple"></span>
+                                <span className="status-dot status-dot--blue"></span>
                                 <a href={recordUrl(r)} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>
                                     {r.name}
                                 </a>
