@@ -113,7 +113,7 @@ export function TableInspector() {
                             <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'purple'}`}></span>
                             {tableDisplayLabel(t.name, t.label, t.scope_label)}
                         </span>
-                        <span className={`pp-badge${t.is_custom ? ' pp-badge--green' : ' pp-badge--purple'}`}>
+                        <span className={`pp-badge${t.is_custom ? ' pp-badge--green' : ' pp-badge--accent'}`}>
                             {t.is_custom ? 'Custom' : 'System'}
                         </span>
                     </div>

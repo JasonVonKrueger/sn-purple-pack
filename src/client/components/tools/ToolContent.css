@@ -98,7 +98,7 @@
 .status-dot--green { background-color: rgb(var(--now-color_grouped--green-2, 73,168,68)); }
 .status-dot--yellow { background-color: rgb(var(--now-color_grouped--yellow-2, 224,183,28)); }
 .status-dot--red { background-color: rgb(var(--now-color_grouped--red-2, 201,54,2)); }
-.status-dot--purple { background-color: rgb(var(--pp-accent-2)); }
+.status-dot--accent { background-color: rgb(var(--pp-accent-2)); }
 
 .pp-badge {
     display: inline-block;
@@ -126,7 +126,7 @@
     color: rgb(var(--now-color_grouped--green-2, 73,168,68));
 }
 
-.pp-badge--purple {
+.pp-badge--accent {
     background-color: rgb(var(--pp-accent-0));
     color: rgb(var(--pp-accent-4));
 }

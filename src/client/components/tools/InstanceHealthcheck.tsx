@@ -27,7 +27,7 @@ function findingDotClass(level: string): string {
         case 'ok': return 'status-dot status-dot--green'
         case 'warning': return 'status-dot status-dot--yellow'
         case 'critical': return 'status-dot status-dot--red'
-        default: return 'status-dot status-dot--purple'
+        default: return 'status-dot status-dot--accent'
     }
 }
 
@@ -91,7 +91,7 @@ export function InstanceHealthcheck() {
                     {LOADING_LABELS.map(name => (
                         <div key={name} className="tool-list-item">
                             <span className="tool-list-label">
-                                <span className="status-dot status-dot--purple"></span>
+                                <span className="status-dot status-dot--accent"></span>
                                 Checking {name}…
                             </span>
                         </div>
