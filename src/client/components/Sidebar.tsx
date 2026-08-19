@@ -29,8 +29,8 @@ export function Sidebar({ activeTool, onNavigate }: SidebarProps) {
     return (
         <aside className="pp-sidebar">
             <div className="pp-sidebar-header">
-                <Icon icon="toolbox-fill" size="lg" />
-                <span className="pp-sidebar-title">Purple Pack</span>
+                <Icon icon="user-group-fill" size="lg" />
+                <span className="pp-sidebar-title">Cohesion</span>
             </div>
             <nav className="pp-sidebar-nav">
                 {NAV_ITEMS.map((item) => (

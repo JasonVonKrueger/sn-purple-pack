@@ -58,7 +58,7 @@ export function ScriptAnalyzer() {
                         <span className="status-dot status-dot--green"></span>
                         eval() usage in scheduled job script
                     </span>
-                    <span className="pp-badge pp-badge--purple">Info</span>
+                    <span className="pp-badge pp-badge--blue">Info</span>
                 </div>
             </div>
         </div>

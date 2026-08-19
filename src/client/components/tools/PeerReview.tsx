@@ -19,7 +19,7 @@ function statusBadgeClass(status: string): string {
         case 'approved': return 'pp-badge pp-badge--green';
         case 'rejected': case 'changes_requested': return 'pp-badge pp-badge--red';
         case 'in_review': return 'pp-badge pp-badge--yellow';
-        default: return 'pp-badge pp-badge--purple';
+        default: return 'pp-badge pp-badge--blue';
     }
 }
 
@@ -71,9 +71,9 @@ export function PeerReview() {
                     <p className="tool-card-title">Select Update Set</p>
                     <div className="tool-list">
                         {updateSets.map((us, i) => (
-                            <div key={us.sys_id} className="tool-list-item" style={{ cursor: 'pointer', background: selectedUsIndex === i ? 'rgba(148,96,183,0.08)' : undefined }} onClick={() => selectUpdateSet(i)}>
+                            <div key={us.sys_id} className="tool-list-item" style={{ cursor: 'pointer', background: selectedUsIndex === i ? 'rgba(31,116,224,0.08)' : undefined }} onClick={() => selectUpdateSet(i)}>
                                 <span className="tool-list-label">{us.name}</span>
-                                {selectedUsIndex === i && <span className="pp-badge pp-badge--purple">Selected</span>}
+                                {selectedUsIndex === i && <span className="pp-badge pp-badge--blue">Selected</span>}
                             </div>
                         ))}
                         {updateSets.length === 0 && <div className="tool-list-item"><span className="tool-list-label">No in-progress update sets found</span></div>}
@@ -96,7 +96,7 @@ export function PeerReview() {
                     {reviews.map(r => (
                         <div key={r.sys_id} className="tool-list-item">
                             <span className="tool-list-label">
-                                <span className="status-dot status-dot--purple"></span>
+                                <span className="status-dot status-dot--blue"></span>
                                 {r.update_set_name} — {r.reviewer?.display_value || 'Unknown'}
                             </span>
                             <span className={statusBadgeClass(r.status)}>{r.status?.replace('_', ' ')}</span>

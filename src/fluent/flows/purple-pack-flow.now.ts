@@ -4,9 +4,9 @@ import { ppCreateIntegrationSubflow } from './pp-create-integration-subflow.now'
 Flow(
     {
         $id: Now.ID['purple_pack_flow'],
-        name: 'Purple Pack',
+        name: 'Cohesion',
         description:
-            'Main Purple Pack orchestration flow. Triggers when a service account is created and provisions the full integration (OAuth app).',
+            'Main Cohesion orchestration flow. Triggers when a service account is created and provisions the full integration (OAuth app).',
         runAs: 'system',
         flowPriority: 'MEDIUM',
     },
@@ -56,7 +56,7 @@ Flow(
                     },
                     {
                         log_level: 'info',
-                        log_message: `Purple Pack: Integration provisioned successfully for ${wfa.dataPill(_params.trigger.current.user_name, 'string')}`,
+                        log_message: `Cohesion: Integration provisioned successfully for ${wfa.dataPill(_params.trigger.current.user_name, 'string')}`,
                     }
                 )
             }
@@ -70,7 +70,7 @@ Flow(
                 },
                 {
                     log_level: 'error',
-                    log_message: `Purple Pack: Integration provisioning failed for ${wfa.dataPill(_params.trigger.current.user_name, 'string')}`,
+                    log_message: `Cohesion: Integration provisioning failed for ${wfa.dataPill(_params.trigger.current.user_name, 'string')}`,
                 }
             )
         })

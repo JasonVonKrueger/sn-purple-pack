@@ -5,7 +5,7 @@ Record({
     $id: Now.ID['purple_pack_app_menu'],
     table: 'sys_app_application',
     data: {
-        title: 'Purple Pack',
+        title: 'Cohesion',
         active: true,
         category: 'custom',
         roles: ['admin'],
