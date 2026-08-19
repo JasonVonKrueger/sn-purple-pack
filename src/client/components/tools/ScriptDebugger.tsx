@@ -42,17 +42,17 @@ export function ScriptDebugger() {
                 </div>
                 <div className="tool-list-item">
                     <span className="tool-list-label">
-                        <span className="status-dot status-dot--accent"></span>
+                        <span className="status-dot status-dot--blue"></span>
                         current.state = &quot;resolved&quot;
                     </span>
-                    <span className="pp-badge pp-badge--accent">Variable</span>
+                    <span className="pp-badge pp-badge--blue">Variable</span>
                 </div>
                 <div className="tool-list-item">
                     <span className="tool-list-label">
-                        <span className="status-dot status-dot--accent"></span>
+                        <span className="status-dot status-dot--blue"></span>
                         gr.getRowCount() = 148
                     </span>
-                    <span className="pp-badge pp-badge--accent">Expression</span>
+                    <span className="pp-badge pp-badge--blue">Expression</span>
                 </div>
                 <div className="tool-list-item">
                     <span className="tool-list-label">

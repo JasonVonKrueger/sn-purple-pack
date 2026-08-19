@@ -55,10 +55,10 @@ export function UpdateSetTracker() {
                 </div>
                 <div className="tool-list-item">
                     <span className="tool-list-label">
-                        <span className="status-dot status-dot--accent"></span>
+                        <span className="status-dot status-dot--blue"></span>
                         Security Patch Jan-2024 — 56 changes
                     </span>
-                    <span className="pp-badge pp-badge--accent">Completed</span>
+                    <span className="pp-badge pp-badge--blue">Completed</span>
                 </div>
             </div>
         </div>

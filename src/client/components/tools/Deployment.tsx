@@ -120,7 +120,7 @@ export function Deployment() {
                                 </td>
                                 <td className="deployment-td deployment-td--name">{entry.name}</td>
                                 <td className="deployment-td">
-                                    <span className="pp-badge pp-badge--accent">{entry.state}</span>
+                                    <span className="pp-badge pp-badge--blue">{entry.state}</span>
                                 </td>
                                 <td className="deployment-td">{entry.scope}</td>
                                 <td className="deployment-td deployment-td--mono">{entry.sys_updated_on}</td>

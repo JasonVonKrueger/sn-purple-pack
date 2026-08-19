@@ -66,6 +66,10 @@ declare global {
                         table: 'sys_hub_flow_logic_instance_v2'
                         id: '14fb08897fe7408db365947af1753ca9'
                     }
+                    'components/tools/ToolContent.css': {
+                        table: 'sys_ux_theme_asset'
+                        id: '23f0df9b599d47b59acfd123cebbe98e'
+                    }
                     create_oauth_app: {
                         table: 'sys_hub_action_instance_v2'
                         id: '5cf37a9a09444fb1a968c5f575f6dce2'
@@ -208,7 +212,7 @@ declare global {
                     }
                     'src_server_business-rules_validate-update-set-name_js': {
                         table: 'sys_module'
-                        id: '08d1c3f1434443bd8e60fe253ce10e8e'
+                        id: '1959968e96844be1b770e706ab4c20d7'
                     }
                     'src_server_script-includes_gitlab-committer_js': {
                         table: 'sys_module'

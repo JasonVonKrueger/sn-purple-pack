@@ -1,4 +1,4 @@
-# Cohesion 🤝
+# Cohesion 🔗
 
 Cohesion is a ServiceNow UI Page tool suite that consolidates common developer and admin workflows into a single workspace.
 
@@ -89,7 +89,7 @@ src/
 - `@servicenow/react-components`
 - ServiceNow Fluent SDK (`@servicenow/sdk`)
 - ServiceNow Glide tooling (`@servicenow/glide`)
-- CSS theming tokens (including Cohesion accent tokens)
+- CSS theming tokens (including blue grouped tokens)
 
 ## Development
 

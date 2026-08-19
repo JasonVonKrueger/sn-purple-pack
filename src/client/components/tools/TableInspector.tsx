@@ -110,10 +110,10 @@ export function TableInspector() {
                 {!loading && data?.tables.map(t => (
                     <div key={t.sys_id} className="tool-list-item">
                         <span className="tool-list-label">
-                            <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'accent'}`}></span>
+                            <span className={`status-dot status-dot--${t.is_custom ? 'green' : 'blue'}`}></span>
                             {tableDisplayLabel(t.name, t.label, t.scope_label)}
                         </span>
-                        <span className={`pp-badge${t.is_custom ? ' pp-badge--green' : ' pp-badge--accent'}`}>
+                        <span className={`pp-badge${t.is_custom ? ' pp-badge--green' : ' pp-badge--blue'}`}>
                             {t.is_custom ? 'Custom' : 'System'}
                         </span>
                     </div>
