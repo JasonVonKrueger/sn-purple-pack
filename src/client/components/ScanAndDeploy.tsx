@@ -43,7 +43,7 @@ const MOCK_PHASE_OUTPUTS: Record<number, string[]> = {
         '✓ Connecting to Git remote…',
         '✓ Exporting update set XML (34 records)…',
         '✓ Staging changes…',
-        '✓ Committing: "chore: export update set Purple Pack Dev"',
+        '✓ Committing: "chore: export update set Cohesion Dev"',
         '✓ Pushed to origin/main — commit a3f8c2d',
     ],
     3: [

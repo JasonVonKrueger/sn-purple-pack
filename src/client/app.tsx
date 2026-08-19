@@ -14,11 +14,11 @@ export function App() {
         if (window.self !== window.top) {
             (window as any).CustomEvent?.fireTop?.('magellanNavigator.permalink.set', {
                 relativePath: `purple_pack.do${path}`,
-                title: `Purple Pack - ${toolName}`
+                title: `Cohesion - ${toolName}`
             });
         } else {
             window.history.pushState({}, '', path);
-            document.title = `Purple Pack - ${toolName}`;
+            document.title = `Cohesion - ${toolName}`;
         }
     }
 

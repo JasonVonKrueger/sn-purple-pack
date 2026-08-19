@@ -1,6 +1,6 @@
-# Purple Pack 🟣
+# Cohesion 🔗
 
-Purple Pack is a ServiceNow UI Page tool suite that consolidates common developer and admin workflows into a single workspace.
+Cohesion is a ServiceNow UI Page tool suite that consolidates common developer and admin workflows into a single workspace.
 
 ## Access
 
@@ -10,7 +10,7 @@ Open the app on your instance at:
 
 ## Current Tooling
 
-Purple Pack uses a left sidebar layout. Selecting a tool renders it in the main content area.
+Cohesion uses a left sidebar layout. Selecting a tool renders it in the main content area.
 
 | Tool | Description |
 |---|---|
@@ -89,7 +89,7 @@ src/
 - `@servicenow/react-components`
 - ServiceNow Fluent SDK (`@servicenow/sdk`)
 - ServiceNow Glide tooling (`@servicenow/glide`)
-- CSS theming tokens (including purple grouped tokens)
+- CSS theming tokens (including blue grouped tokens)
 
 ## Development
 
