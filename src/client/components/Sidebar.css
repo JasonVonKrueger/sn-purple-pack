@@ -4,7 +4,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: rgb(var(--now-color_grouped--purple-4, 107,69,133));
+    background-color: rgb(var(--pp-accent-4));
     color: #fff;
     overflow-y: auto;
 }

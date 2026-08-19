@@ -71,7 +71,7 @@ export function PeerReview() {
                     <p className="tool-card-title">Select Update Set</p>
                     <div className="tool-list">
                         {updateSets.map((us, i) => (
-                            <div key={us.sys_id} className="tool-list-item" style={{ cursor: 'pointer', background: selectedUsIndex === i ? 'rgba(148,96,183,0.08)' : undefined }} onClick={() => selectUpdateSet(i)}>
+                            <div key={us.sys_id} className="tool-list-item" style={{ cursor: 'pointer', background: selectedUsIndex === i ? 'rgba(var(--pp-accent-3), 0.08)' : undefined }} onClick={() => selectUpdateSet(i)}>
                                 <span className="tool-list-label">{us.name}</span>
                                 {selectedUsIndex === i && <span className="pp-badge pp-badge--purple">Selected</span>}
                             </div>

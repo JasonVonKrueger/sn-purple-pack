@@ -1,3 +1,11 @@
+:root {
+    --pp-accent-0: 229, 247, 246;
+    --pp-accent-1: 182, 229, 226;
+    --pp-accent-2: 77, 189, 178;
+    --pp-accent-3: 24, 149, 139;
+    --pp-accent-4: 11, 93, 102;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -1,3 +1,11 @@
+:root {
+    --pp-accent-0: 229, 247, 246;
+    --pp-accent-1: 182, 229, 226;
+    --pp-accent-2: 77, 189, 178;
+    --pp-accent-3: 24, 149, 139;
+    --pp-accent-4: 11, 93, 102;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +37,7 @@ html, body, #scan-deploy-root {
 .sad-header h2 {
     font-size: 20px;
     font-weight: 700;
-    color: rgb(var(--now-color_grouped--purple-4, 107,69,133));
+    color: rgb(var(--pp-accent-4));
 }
 
 .sad-header p {
@@ -39,12 +47,12 @@ html, body, #scan-deploy-root {
 
 /* Update set info banner */
 .sad-info-bar {
-    background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
-    border: 1px solid rgb(var(--now-color_grouped--purple-1, 213,182,240));
+    background-color: rgb(var(--pp-accent-0));
+    border: 1px solid rgb(var(--pp-accent-1));
     border-radius: 6px;
     padding: 10px 14px;
     font-size: 13px;
-    color: rgb(var(--now-color_grouped--purple-4, 107,69,133));
+    color: rgb(var(--pp-accent-4));
     display: flex;
     align-items: center;
     gap: 8px;
@@ -80,7 +88,7 @@ html, body, #scan-deploy-root {
 
 .sad-phase--running::before,
 .sad-phase--success::before {
-    background-color: rgb(var(--now-color_grouped--purple-2, 189,122,234));
+    background-color: rgb(var(--pp-accent-2));
 }
 
 .sad-phase-indicator {
@@ -108,9 +116,9 @@ html, body, #scan-deploy-root {
 }
 
 .sad-phase--running .sad-phase-circle {
-    border-color: rgb(var(--now-color_grouped--purple-3, 148,96,183));
-    background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
-    color: rgb(var(--now-color_grouped--purple-3, 148,96,183));
+    border-color: rgb(var(--pp-accent-3));
+    background-color: rgb(var(--pp-accent-0));
+    color: rgb(var(--pp-accent-3));
     animation: sad-pulse 1.5s infinite;
 }
 
@@ -127,8 +135,8 @@ html, body, #scan-deploy-root {
 }
 
 @keyframes sad-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(148,96,183,0.3); }
-    50% { box-shadow: 0 0 0 6px rgba(148,96,183,0); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(var(--pp-accent-3), 0.3); }
+    50% { box-shadow: 0 0 0 6px rgba(var(--pp-accent-3), 0); }
 }
 
 .sad-phase-body {
@@ -169,8 +177,8 @@ html, body, #scan-deploy-root {
 }
 
 .sad-badge--running {
-    background-color: rgb(var(--now-color_grouped--purple-0, 239,222,250));
-    color: rgb(var(--now-color_grouped--purple-4, 107,69,133));
+    background-color: rgb(var(--pp-accent-0));
+    color: rgb(var(--pp-accent-4));
 }
 
 .sad-badge--success {
@@ -224,8 +232,8 @@ html, body, #scan-deploy-root {
 .sad-progress-fill {
     height: 100%;
     background: linear-gradient(90deg,
-        rgb(var(--now-color_grouped--purple-2, 189,122,234)),
-        rgb(var(--now-color_grouped--purple-3, 148,96,183))
+        rgb(var(--pp-accent-2)),
+        rgb(var(--pp-accent-3))
     );
     border-radius: 2px;
     transition: width 0.4s ease;
@@ -256,12 +264,12 @@ html, body, #scan-deploy-root {
 }
 
 .sad-btn--primary {
-    background-color: rgb(var(--now-color_grouped--purple-3, 148,96,183));
+    background-color: rgb(var(--pp-accent-3));
     color: #fff;
 }
 
 .sad-btn--primary:not(:disabled):hover {
-    background-color: rgb(var(--now-color_grouped--purple-4, 107,69,133));
+    background-color: rgb(var(--pp-accent-4));
 }
 
 .sad-btn--secondary {

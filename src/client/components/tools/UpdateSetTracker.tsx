@@ -18,7 +18,7 @@ export function UpdateSetTracker() {
                 <div className="tool-card">
                     <p className="tool-card-title">In Progress</p>
                     <p className="tool-card-value">3</p>
-                    <p className="tool-card-meta">Current: Purple Pack Dev</p>
+                    <p className="tool-card-meta">Current: Cohesion Dev</p>
                 </div>
                 <div className="tool-card">
                     <p className="tool-card-title">Completed (30d)</p>
@@ -35,7 +35,7 @@ export function UpdateSetTracker() {
                 <div className="tool-list-item">
                     <span className="tool-list-label">
                         <span className="status-dot status-dot--green"></span>
-                        Purple Pack Dev — 34 changes
+                        Cohesion Dev — 34 changes
                     </span>
                     <span className="pp-badge pp-badge--green">Current</span>
                 </div>
